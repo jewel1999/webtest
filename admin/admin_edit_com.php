@@ -7,8 +7,7 @@
         $com_name = $_POST['com_name'];
         $com_owner = $_POST['com_owner'];
         $com_status  = $_POST['com_status'];
-
-                
+    
                 if(!isset($_SESSION['error'])){
                     $sql = $conn->prepare("UPDATE computers SET com_sn=:com_sn,com_name=:com_name,
                     com_owner=:com_owner,com_status=:com_status WHERE id=:id ");
@@ -19,17 +18,18 @@
                     $sql->bindParam(":com_status",$com_status);
                     $sql->execute();
 
-                    print_r($sql);
-
                     $_SESSION['success'] = "Update sucessfully! " ;
-                    // header("location:admin_com.php");     
+                    header("location:admin_com.php");     
                 }else {
                     $_SESSION['error'] = "Update unsucessfully! " ;
-                    // header("location:admin_com.php");
+                    header("location:admin_com.php");
                 }
                  
         
         }
+
+        /* ------end of update section ------- */
+
 
 ?>
 <!DOCTYPE html>

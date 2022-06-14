@@ -75,7 +75,7 @@
         </thead>
         <tbody>
             <?php 
-                $join =$conn->query("SELECT * FROM repair_notices  JOIN computers ");
+                $join =$conn->query("SELECT * FROM repair_notices  JOIN computers ");  //join table 
                 $join->execute(); 
                 $rn_table = $join->fetchALL();
 

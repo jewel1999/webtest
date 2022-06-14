@@ -1,29 +1,29 @@
 <?php 
     session_start();
-    require_once "../connect_db.php";
-    if(isset($_POST['emp_update'])){
-      
-        $employee_id = $_POST['employee_id'];
-        $fname_thai = $_POST['fname_thai'];
-        $lname_thai = $_POST['lname_thai'];
-        $fname_eng = $_POST['fname_eng'];
-        $lname_eng = $_POST['lname_eng'];
-        $nickname = $_POST['nickname'];
-        $floor_  = $_POST['floor_'];
-        $extn  = $_POST['extn'];
-        $usermail  = $_POST['usermail'];
-        $phone  = $_POST['phone'];
-        $sex  = $_POST['sex'];
-        $workgroup  = $_POST['workgroup'];
-        $workline  = $_POST['workline'];
-        $department  = $_POST['department'];
-        $department_eng  = $_POST['department_eng'];
-        $status_user = $_POST['status_user'];
-        $station  = $_POST['station'];
+    require_once '../connect_db.php';
 
-                if(!isset($_SESSION['error'])){
-                    $update_emp = $conn->prepare("UPDATE employees 
-                    SET  employee_id=:employee_id,
+                if(isset($_POST['emp_update'])){
+                    $id =  $_POST['id'];
+                    $employee_id = $_POST['employee_id'];
+                    $fname_thai = $_POST['fname_thai'];
+                    $lname_thai = $_POST['lname_thai'];
+                    $fname_eng = $_POST['fname_eng'];
+                    $lname_eng = $_POST['lname_eng'];
+                    $nickname = $_POST['nickname'];
+                    $floor_  = $_POST['floor_'];
+                    $extn  = $_POST['extn'];
+                    $usermail  = $_POST['usermail'];
+                    $phone  = $_POST['phone'];
+                    $sex  = $_POST['sex'];
+                    $workgroup  = $_POST['workgroup'];
+                    $workline  = $_POST['workline'];
+                    $department  = $_POST['department'];
+                    $department_eng  = $_POST['department_eng'];
+                    $status_user = $_POST['status_user'];
+                    $station  = $_POST['station'];
+
+                if(!isset($_SESSION[''])){
+                    $update_emp= $conn->prepare("UPDATE employees SET employee_id=:employee_id,
                     fname_thai=:fname_thai,
                     lname_thai=:lname_thai,
                     fname_eng=:fname_eng,
@@ -40,7 +40,7 @@
                     department_eng=:department_eng,
                     status_user=:status_user,
                     station=:station 
-                    WHERE id=:id");
+                    WHERE id=:id "); 
 
                     $update_emp->bindParam(":id",$id);
                     $update_emp->bindParam(":employee_id",$employee_id);
@@ -64,14 +64,12 @@
 
                     print_r($update_emp);
 
-                    $_SESSION['success'] = "Update sucessfully! " ;
+                    $_SESSION['success'] ="Update sucessfully! " ;
                     header("location:admin_emp.php");     
                 }else {
-                    $_SESSION['error'] = "Update unsucessfully! " ;
+                    $_SESSION['error']   ="Update unsucessfully! " ;
                     header("location:admin_emp.php");
                 }
-                 
-        
         }
 
 ?>
@@ -86,7 +84,7 @@
 
     <style>
         .container{
-            max-width:700px;
+            max-width:600px;
         }
     </style>
 
@@ -104,6 +102,11 @@
                         $data = $stmt->fetch();
                     }
                 ?>
+
+            <div class="mb-3">
+                <label for="id" class="col-form-label"> #id</label>
+                <input  readonly type="text" value="<?= $data['id']?>" class="form-control" name="id">
+            </div>
 
             <div class="mb-3">
                 <label for="employee_id" class="col-form-label">employee #id</label>
@@ -200,4 +203,4 @@
            
         </div>
 </body>
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+

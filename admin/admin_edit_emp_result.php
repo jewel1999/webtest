@@ -23,7 +23,7 @@
 
                 if(!isset($_SESSION['error'])){
                     $update_emp = $conn->prepare("UPDATE employees 
-                    SET  employee_id=:employee_id,
+                    SET employee_id=:employee_id,
                     fname_thai=:fname_thai,
                     lname_thai=:lname_thai,
                     fname_eng=:fname_eng,
@@ -62,7 +62,7 @@
                     $update_emp->bindParam(":station",$station);
                     $update_emp->execute();
 
-                    print_r($update_emp);
+
 
                     $_SESSION['success'] = "Update sucessfully! " ;
                     // header("location:admin_emp.php");     
@@ -165,7 +165,7 @@
             </div>
            
             <div class="mb-3">
-                <label for="workline" class="col-form-label">สายารทำงาน (workline)</label>
+                <label for="workline" class="col-form-label">สายการทำงาน (workline)</label>
                 <input type="text" value="<?= $data['workline']?>" class="form-control" name="workline">
             </div>
             
@@ -200,4 +200,4 @@
            
         </div>
 </body>
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
