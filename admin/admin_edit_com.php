@@ -19,11 +19,13 @@
                     $sql->bindParam(":com_status",$com_status);
                     $sql->execute();
 
+                    print_r($sql);
+
                     $_SESSION['success'] = "Update sucessfully! " ;
-                    header("location:admin_com.php");     
+                    // header("location:admin_com.php");     
                 }else {
                     $_SESSION['error'] = "Update unsucessfully! " ;
-                    header("location:admin_com.php");
+                    // header("location:admin_com.php");
                 }
                  
         

@@ -158,7 +158,7 @@
         <thead>
             <tr>
             <th scope="col">#</th>
-            <th scope="col">emplonee id :</th>
+            <th scope="col">employee #id</th>
             <th scope="col">firstname</th>
             <th scope="col">lastname</th>
             <th scope="col">nickname</th>
@@ -184,7 +184,7 @@
                 <th scope="row"><?php echo $users['id']; ?> </th>
                 <td><?php echo $users['employee_id']; ?>    </td>
                 
-                <td><a href="admin.php?id='.$users['fname_thai'].'"><?php echo $users['fname_thai'];?></a></td>
+                <td><a href="admin_show_emp.php id='.$users['fname_thai'].'"><?php echo $users['fname_thai'];?></a></td>
                 <td><?php echo $users['lname_thai'] ;  ?> </td>
                 <td><?php echo $users['nickname']; ?>  </td>
                 <td><?php echo $users['department']; ?> </td>

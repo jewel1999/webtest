@@ -2,7 +2,7 @@
     session_start();
     require_once "../connect_db.php";
     if(isset($_POST['emp_update'])){
-      
+        $id = $_POST['id'];    
         $employee_id = $_POST['employee_id'];
         $fname_thai = $_POST['fname_thai'];
         $lname_thai = $_POST['lname_thai'];
@@ -40,7 +40,7 @@
                     department_eng=:department_eng,
                     status_user=:status_user,
                     station=:station 
-                    WHERE id=:id");
+                    WHERE id=:id ");
 
                     $update_emp->bindParam(":id",$id);
                     $update_emp->bindParam(":employee_id",$employee_id);
@@ -65,10 +65,10 @@
                     print_r($update_emp);
 
                     $_SESSION['success'] = "Update sucessfully! " ;
-                    header("location:admin_emp.php");     
+                    // header("location:admin_emp.php");     
                 }else {
                     $_SESSION['error'] = "Update unsucessfully! " ;
-                    header("location:admin_emp.php");
+                    // header("location:admin_emp.php");
                 }
                  
         
@@ -193,7 +193,7 @@
             
             <div class="modal-footer">
             <a type="button" class="btn btn-danger" href="admin_emp.php">Close</a>
-            <button type="submit" name="emp_update" class="btn btn-success" >Update</button>
+            <button type="submit" name="emp_update" class="btn btn-success"  >Update</button>
             
         </div>
             </form>

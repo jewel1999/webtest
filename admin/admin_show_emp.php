@@ -24,7 +24,8 @@
 
                 
                 if(!isset($_SESSION['error'])){
-                    $sql = $conn->prepare("UPDATE employees SET employee_id=:employee_id,
+                    $sql = $conn->prepare("UPDATE employees SET 
+                    employee_id=:employee_id,
                     fname_thai=:fname_thai,
                     lname_thai=:lname_thai,
                     fname_eng=:fname_eng,
@@ -61,12 +62,13 @@
                     $sql->bindParam(":user_status",$user_status);
                     $sql->bindParam(":station",$station);
                     $sql->execute();
+                    
 
                     $_SESSION['success'] = "Update sucessfully! " ;
-                    header("location:admin_emp.php");     
+                    // header("location:admin_emp.php");     
                 }else {
                     $_SESSION['error'] = "Update unsucessfully! " ;
-                    header("location:admin_emp.php");
+                    // header("location:admin_emp.php");
                 }
                  
         
@@ -91,9 +93,9 @@
 </head>
 <body>
 
-  <div class="container mt-4"> 
-        <div class="modal-body">  <-- insert into data forms  -->   
-            <form action="admin_edit_emp.php" method="post" enctype="multiplepart/form-data">
+  <div class="container mt-6"> 
+        <div class="modal-body">  
+            <form action="admin_show_emp.php" method="post" enctype="multiplepart/form-data">
                 <?php 
                     if(isset($_GET['id'])){
                         $id = $_GET['id'];
