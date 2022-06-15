@@ -107,85 +107,85 @@
 
             <div class="mb-3">
                 <label for="employee_id" class="col-form-label">employee #id</label>
-                <input readeonly type="text" value="<?= $data['employee_id']?>" class="form-control" name="employee_id">
+                <input readonly type="text" value="<?= $data['employee_id']?>" class="form-control" name="employee_id">
             </div>
             
             <div class="mb-3">
                 <label for="fname_thai" class="col-form-label">ชื่อจริง (ภาษาไทย)</label>
-                <input readeonly  type="text" value="<?= $data['fname_thai']?>" class="form-control" name="fname_thai">
+                <input readonly  type="text" value="<?= $data['fname_thai']?>" class="form-control" name="fname_thai">
             </div>
             
             <div class="mb-3">
                 <label for="lname_thai" class="col-form-label">นามสกุล (ภาษาไทย)</label>
-                <input readeonly  type="text" value="<?= $data['lname_thai']?>" class="form-control" name="lname_thai">
+                <input readonly  type="text" value="<?= $data['lname_thai']?>" class="form-control" name="lname_thai">
             </div>
             
             <div class="mb-3">
                 <label for="fname_eng" class="col-form-label">ชื่อ (ภาษาอังกฤษ)</label>
-                <input readeonly  type="text" value="<?= $data['fname_eng']?>" class="form-control" name="fname_eng">
+                <input readonly  type="text" value="<?= $data['fname_eng']?>" class="form-control" name="fname_eng">
             </div>
 
             <div class="mb-3">
                 <label for="lname_eng" class="col-form-label">นามสกุล (ภาษาอังกฤษ)</label>
-                <input readeonly  type="text" value="<?= $data['lname_eng']?>" class="form-control" name="lname_eng">
+                <input readonly  type="text" value="<?= $data['lname_eng']?>" class="form-control" name="lname_eng">
             </div>
             
             <div class="mb-3">
                 <label for="nickname" class="col-form-label">ชื่อเล่น</label>
-                <input readeonly  type="text" value="<?= $data['nickname']?>" class="form-control" name="nickname">
+                <input readonly  type="text" value="<?= $data['nickname']?>" class="form-control" name="nickname">
             </div>
             
             <div class="mb-3">
                 <label for="floor_" class="col-form-label">floor</label>
-                <input readeonly  type="text" value="<?= $data['floor_']?>" class="form-control" name="floor_">
+                <input readonly  type="text" value="<?= $data['floor_']?>" class="form-control" name="floor_">
             </div>
             
             <div class="mb-3">
                 <label for="extn" class="col-form-label">เบอร์ติดต่อภายใน</label>
-                <input readeonly  type="text" value="<?= $data['extn']?>" class="form-control" name="extn">
+                <input readonly  type="text" value="<?= $data['extn']?>" class="form-control" name="extn">
             </div>
             
             <div class="mb-3">
                 <label for="usermail" class="col-form-label">อีเมลล์ผู้ใช้งาน</label>
-                <input readeonly  type="text" value="<?= $data['usermail']?>" class="form-control" name="usermail">
+                <input readonly  type="text" value="<?= $data['usermail']?>" class="form-control" name="usermail">
             </div>
             
             <div class="mb-3">
                 <label for="phone" class="col-form-label">เบอร์โทรติดต่อ</label>
-                <input readeonly type="text" value="<?= $data['phone']?>" class="form-control" name="phone">
+                <input readonly type="text" value="<?= $data['phone']?>" class="form-control" name="phone">
             </div>
             <div class="mb-3">
                 <label for="sex" class="col-form-label">เพศ</label>
-                <input readeonly  type="text" value="<?= $data['sex']?>" class="form-control" name="sex">
+                <input readonly  type="text" value="<?= $data['sex']?>" class="form-control" name="sex">
             </div>
             <div class="mb-3">
                 <label for="workgroup" class="col-form-label">ส่วนการทำงาน (workgroup)</label>
-                <input readeonly  type="text" value="<?= $data['workgroup']?>" class="form-control" name="workgroup">
+                <input readonly  type="text" value="<?= $data['workgroup']?>" class="form-control" name="workgroup">
             </div>
            
             <div class="mb-3">
                 <label for="workline" class="col-form-label">สายการทำงาน (workline)</label>
-                <input readeonly  type="text" value="<?= $data['workline']?>" class="form-control" name="workline">
+                <input readonly  type="text" value="<?= $data['workline']?>" class="form-control" name="workline">
             </div>
             
             <div class="mb-3">
                 <label for="department" class="col-form-label">แผนก</label>
-                <input readeonly  type="text"  value="<?= $data['department']?>" class="form-control" name="department">
+                <input readonly  type="text"  value="<?= $data['department']?>" class="form-control" name="department">
             </div>
 
             <div class="mb-3">
                 <label for="department_eng" class="col-form-label">แผนก (ภาษาอังกฤษ)</label>
-                <input readeonly  type="text"  value="<?= $data['department_eng']?>" class="form-control" name="department_eng">
+                <input readonly  type="text"  value="<?= $data['department_eng']?>" class="form-control" name="department_eng">
             </div>
 
             <div class="mb-3">
                 <label for="status_user" class="col-form-label">สถานะพนักงาน</label>
-                <input readeonly  type="text"  value="<?= $data['status_user']?>" class="form-control" name="status_user">
+                <input readonly  type="text"  value="<?= $data['status_user']?>" class="form-control" name="status_user">
             </div>
 
             <div class="mb-3">
                 <label for="station" class="col-form-label">station</label>
-                <input readeonly  type="text"  value="<?= $data['station']?>" class="form-control" name="station">
+                <input readonly  type="text"  value="<?= $data['station']?>" class="form-control" name="station">
             </div>
                     
             <hr>

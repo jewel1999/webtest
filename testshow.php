@@ -22,128 +22,335 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emp information : admin</title>
+   
+    <!-- icon sidebar cdn-->
+    <script src="https://unpkg.com/feather-icons"></script> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-</head>
-<body>
-    <div class="modal fade" id="UserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Insert Computer</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>    
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
 
-        <div class="modal-body"> 
-            <form action="admin_insert_com.php" method="post" enctype="multiplepart/form-data">
-            <div class="mb-3">
-                <label for="com_sn" class="col-form-label">Compuster serial-number :</label>
-                <input type="text" class="form-control" name="com_sn">
-            </div>
-            <div class="mb-3">
-                <label for="com_name" class="col-form-label">Compuster name :</label>
-                <input type="text" class="form-control" name="com_name">
-            </div>
-            <div class="mb-3">
-                <label for="com_owner" class="col-form-label">Compuster owner :</label>
-                <input type="text" class="form-control" name="com_owner">
-            </div>
-            <div class="mb-3">
-                <label for="com_status" class="col-form-label">Status :</label>
-                <input type="text" class="form-control" name="com_status">
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" name="com_insert" class="btn btn-success">submit</button>
-        </div>
-            </form>
-           
-        </div>
-        
-        </div>
-    </div>
-    </div>
-
-    <!-- -------------------------- table section-------------------------- -->
-
+    <!-- Place this tag in your head or just before your close body tag. ["garph"] -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
-    <div class="container mt-3">
-    <div class="md-4  d-flex ">
-                <a href="admin.php" type="button" class="btn btn-dark" > back</a >
-            </div>
-            <br>
-        <div class="row">
-            <div class="col-md-6">
-                    <h1> Computer information </h1>
-            </div>
-            <div class="col-md-6  d-flex justify-content-end">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UserModal">Insert computer </button>
-            </div>
+    <!-- <style>
+        .sidebar{
+            postion:fixed;
+            top:0;
+            bottom:0;
+            left:0;
+            z-index: 100;
+            padding:90px 0 0;
+            box-shadow: inset -1px 0 0 rgba(0,0,0,0.1);
+        }
 
+        @media (max-width: 768px){
+            .sidebar{
+                top : 11.5 rem;
+                padding:0;
+            }
+        }
+
+        .navbar{
+            box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1);
+        }
+
+        @media (min-width: 768px ){
+            .navbar{
+                top:0;
+                position:sticky;
+                z-index:999;
+            }
+        }
+        .sidebar .nav-link{
+            color: #333 ;
+        }
+    </style> -->
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-primary bg-light">
+        <div class="d-flex col-12 col-md-3 col-lg-2 mb-lg-0 flex-wrap flex-md-nowrap justify-cotent-between">
+            <a href="#" class="navbar-brand ml-2 px-4">Admin dashboard</a>
+
+            <button class="navbar-toggler d-md-none collapsed mb-3 " type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle Navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
-        <hr>
-        <br>
-        <?php if(isset($_SESSION['success'])) { ?>   
-                <div class="alert alert-success" role="alert">  
-            <?php 
-                echo $_SESSION['success'];
-                unset($_SESSION['success']); ?>
-                </div>
-            <?php } ?>
 
-            <?php if(isset($_SESSION['error'])) { ?>
-                <div class="alert alert-danger" role="alert">  
-                <?php 
-                    echo $_SESSION['error'];
-                    unset($_SESSION['error']); ?>
+        <div class="col-12 col-md-4 col-lg-2">
+            <input type="text" class="form-comntrol form-control-dark" placeholder="search" aria-label="search">
+        </div>
+
+        <div class="col-12 col-md-5 col-lg-8 d-flex align-citems-center justify-content-md-end mt-3 mt-md-0">
+        <div class="mr-3 mt-1 px-1">
+            <!-- Place this tag where you want the button to render. 
+                <a class="github-button px-3" href="https://github.com/themesberg/simple-bootstrap-5-dashboard" 
+                data-icon="octicon-star" data-size="large" data-show-count="true" 
+                aria-label="Star themesberg/simple-bootstrap-5-dashboard on GitHub">Star</a>
+        </div>-->
+        
+        <div class="dropdown px-3 mt-1">
+        <button class="btn btn-md btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" 
+        data-bs-toggle="dropdown" aria-expanded="false">Hello,admin :)</button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="#">Proflie</a></li>
+            <li><a class="dropdown-item" href="#">notification</a></li>
+            <li><a class="dropdown-item" href="#">message</a></li>
+            <hr>
+            <li><a class="dropdown-item" href="#">logout</a></li>
+        </ul>
+        </div>
+    </div>
+    </nav> 
+
+
+
+    <div class="container-fluid">
+                <div class="row">
+                    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collpase">
+                        <div class="position-sticky"> 
+                            <ul class="nav flex-column">
+                                
+                            <li class="nav-item mt-4"> 
+                                    <!-- sidebar icon set -->
+                                    <a href="#" class="nav-link active" aria-current="page">
+                                    <i data-feather="airplay"  > </i>
+                                    <span class="ml-3 ">computer</span>
+                                    </a>
+                                    </li>
+                                    <!-- sidebar icon set -->
+                                    <li class="nav-item mt-4"> 
+                                    <a href="#" class="nav-link active" aria-current="page">
+                                    <i data-feather="printer" ></i>
+                                    <span class="ml-3">printer</span>
+                                    </a>
+                                    </li>
+                                    <!-- sidebar icon set -->
+                                    <li class="nav-item mt-4"> 
+                                    <a href="#" class="nav-link active" aria-current="page">
+                                    <i data-feather="cpu"  ></i>
+                                    <span class="ml-3">hardware</span>
+                                    </a>
+                                    </li>
+                                     <!-- sidebar icon set -->
+                                     <li class="nav-item mt-4"> 
+                                    <a href="#" class="nav-link active" aria-current="page">
+                                    <i data-feather="users"  ></i>
+                                    <span class="ml-3">employee</span>
+                                    </a>
+                                    </li>
+                                    <!-- sidebar icon set -->
+                                    <li class="nav-item mt-4"> 
+                                    <a href="#" class="nav-link active" aria-current="page">
+                                    <i data-feather="clipboard"  > </i>
+                                    <span class="ml-2">repair notics</span>
+                                    </a>
+                                    </li>
+                                    <!-- sidebar icon set -->
+                                    <li class="nav-item mt-4"> 
+                                    <a href="#" class="nav-link active" aria-current="page">
+                                    <i data-feather="map"  > </i>
+                                    <span class="ml-2">device tracking</span>
+                                    </a>
+                                    </li>
+                                    
+                                    <hr>
+                        
+                                    <!-- sidebar icon set -->
+                                    <li class="nav-item mt-4"> 
+                                    <a href="#" class="nav-link active" aria-current="page">
+                                    <i data-feather="info" > </i>
+                                    <span class="ml-2">about</span>
+                                    </a>
+                                    </li>
+                                    <!-- sidebar icon set -->
+                                    <li class="nav-item mt-4"> 
+                                    <a href="#" class="nav-link active" aria-current="page">
+                                    <i data-feather="settings" > </i>
+                                    <span class="ml-2">setting</span>
+                                    </a>
+                                    </li>
+                                    <!-- sidebar icon set -->
+                                    <li class="nav-item mt-4"> 
+                                    <a href="#" class="nav-link active" aria-current="page">
+                                    <i class=" text-danger" data-feather="power" > </i>
+                                    <span class="ml-2 text-danger">logout</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                 
+
+                <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4"> 
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" > Home</a> </li>
+                            <li class="breadcrumb-item active" aria-current="page">Overview</li>
+                        </ol> 
+                    </nav>
+
+                    <h1 class="h2">Dashboard</h1>
+                    <p> This is a homepage of a simple admin interface which is part of on themsbreg </p>
+
+                    <div class="row my-4">
+                        <!-- box for show count row table-->
+                        <div class="col-12 col-md-6 col-lg-3 mb-lg-0">
+                            <div class="card">
+                                <h5 class="card-header">computer</h5>
+                                    <div class="card-body">
+                                    <h5 class="card-title">150 </h5>
+                                    <!---add txt for describe -->
+                                    <p class="card-text">Feb 4- May 12 ,thailand</p>
+                                    <!---add txt for describe -->
+                                    <p class="card-text text-success">18.02% increase since last month </p>    
+                                    </div>   
+                            </div>
+                        </div>
+
+                        <!-- box for show count row table-->
+                        <div class="col-12 col-md-6 col-lg-3 mb-lg-0">
+                            <div class="card">
+                                <h5 class="card-header">printer</h5>
+                                    <div class="card-body">
+                                    <h5 class="card-title">58 </h5>
+                                    <!---add txt for describe -->
+                                    <p class="card-text">Feb 4- May 12 ,thailand</p>
+                                    <!---add txt for describe -->
+                                    <p class="card-text text-success">36.56% increase since last month </p>    
+                                    </div>   
+                            </div>
+                        </div>
+
+                        <!-- box for show count row table-->
+                        <div class="col-12 col-md-6 col-lg-3 mb-lg-0">
+                            <div class="card">
+                                <h5 class="card-header">hardware</h5>
+                                    <div class="card-body">
+                                    <h5 class="card-title">244 </h5>
+                                    <!---add txt for describe -->
+                                    <p class="card-text">Feb 4- May 12 ,thailand</p>
+                                    <!---add txt for describe -->
+                                    <p class="card-text text-danger">7.34% increase since last month </p>    
+                                    </div>   
+                            </div>
+                        </div>
+
+                        <!-- box for show count row table-->
+                        <div class="col-12 col-md-6 col-lg-3 mb-lg-0">
+                            <div class="card">
+                                <h5 class="card-header">employee</h5>
+                                    <div class="card-body">
+                                    <h5 class="card-title">154 </h5>
+                                    <!---add txt for describe -->
+                                    <p class="card-text">Feb 4- May 12 ,thailand</p>
+                                    <!---add txt for describe -->
+                                    <p class="card-text text-primary">14.34% increase since last month </p>    
+                                    </div>   
+                            </div>
+                        </div>
+         <!------------------- end of box section --------------------->
                     </div>
-                <?php } ?>
 
+        <!------------------- started table section ------------------->
 
-    <!--  --------------User data---------------------- -->
-    <table class="table">
+                    <table class="table">
         <thead>
             <tr>
             <th scope="col">#</th>
-            <th scope="col">computer serial-number</th>
-            <th scope="col">computer name</th>
-            <th scope="col">owner</th>
-            <th scope="col">status</th>
-            <th scope="col">created time</th>
-            <th scope="col">action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
-                $stmt =$conn->query("SELECT * FROM computers");
-                $stmt->execute(); 
-                $computer_table = $stmt->fetchALL();
+            <th scope="col">employee #id</th>
+            <th scope="col">firstname</th>
+            <th scope="col">lastname</th>
+            <th scope="col">nickname</th>
+            <th scope="col">department</th>
+            <th scope="col">phone</th>
+            <th scope="col">extn</th>
+            
 
-                if(!$computer_table){
-                    echo"<tr> <td colpan='6' class='text-center'> No data found </td> </tr>";
+            </tr>
+            </thead>
+            <tbody>
+                <?php 
+                $stmt =$conn->query("SELECT * FROM employees");
+                $stmt->execute(); 
+                $users_table = $stmt->fetchALL();
+
+                if(!$users_table){
+                    echo"<tr><td colpan='6' class='text-center'> No data found </td> </tr>";
                 }else{
-                    foreach  ($computer_table as $computers) {   // foreach = loop data in table
+                    foreach  ($users_table as $users) {   // foreach = loop data in table
             ?>
             <tr>
-                <th scope="row"><?php echo $computers['id']; ?> </th>
-                <td><?php echo $computers['com_sn']; ?>     </td>
-                <td><?php echo $computers['com_name']; ?>   </td>
-                <td><?php echo $computers['com_owner']; ?>  </td>
-                <td><?php echo $computers['com_status']; ?> </td>
-                <td><?php echo $computers['create_at']; ?>  </td>       
-                <td> 
-                    
-                     <a href="admin_edit_com.php?id=<?= $computers['id']; ?>"  class="btn btn-warning">Edit</a>
-                     <a href="?delete=<?= $computers['id']; ?>"  class="btn btn-danger" onclick="return confirm('are you sure to delete ?')" >Delete</a>
-                </td>    
+                <th scope="row"><?php echo $users['id']; ?> </th>
+                <td><?php echo $users['employee_id']; ?>    </td>
+                
+                <td><a href="admin_show_emp.php "><?php echo $users['fname_thai'];?></a></td>
+                <td><?php echo $users['lname_thai'] ;  ?> </td>
+                <td><?php echo $users['nickname']; ?>  </td>
+                <td><?php echo $users['department']; ?> </td>
+                <td><?php echo $users['phone']; ?>  </td>     
+                <td><?php echo $users['extn']; ?>  </td>          
+                   
             </tr>
-        <?php }} ?>   
-        </tbody>
-    </table>
+            <?php }} ?>   
+            </tbody>
+            </table>  
+            <a href="#" class="btn btn-block btn-secondary d-flex flex justify-item-center justify-content-center"> view all</a>
+            </div>
+        </div>  
+        </div>
             
-</div>
-            
-    
-    
+                
+    </div>
+
+                        <!-- graph -->
+                        <div class="col-12 col-xl-4 mt-2">
+                            <div class="card">
+                            <h5 class="card-header">traffic last week </h5>
+                            <div class="card-body">
+                                <div id="traffic-chart"></div>
+                            </div>
+                        </div>     
+                    </div>
+                
+                
+                </div>
+                <footer class="pt-5 d-flex justify-content-between"> 
+                    <span>copyright &copy; 2022 <a href="https://themesberg.com"> jewel sp :)</a></span>
+                    <ul class="nav m-0">
+                        <li class="nav-item"> 
+                            <a href="#" class="nav-link text-secondary" aria-current="page">Privacy Policy </a>
+                        </li>
+
+                        <li class="nav-item"> 
+                            <a href="#" class="nav-link text-secondary" >Terms and conditions</a>
+                        </li>
+
+                        <li class="nav-item"> 
+                            <a href="#" class="nav-link text-secondary" >Contact</a>
+                        </li>
+
+                    </ul>
+                </footer>
+                </main>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/chartist.js/lastest/Chartlist.min.js"> </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>    
+   
+    <script> feather.replace()
+
+    new Chartist.Line('#traffic-chart',{
+        labels:['week 1','week 2','week 3','wekk 4'],
+        series:[
+            [2300,5000,8700,4800]
+        ]
+    }); 
+    </script>
+    
 </body>
 </html>
