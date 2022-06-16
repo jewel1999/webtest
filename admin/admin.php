@@ -330,7 +330,7 @@
                 <th scope="row"><?php echo $users['id'];?> </th>
                 <td><?php echo $users['employee_id']; ?> </td>
                 
-                <td><a href="admin_show_emp.php "><?php echo $users['fname_thai'];?></a></td>
+                <td><a href="admin_show_emp.php" ><?php echo $users['fname_thai'];?></a></td>
                 <td><?php echo $users['lname_thai'] ;  ?> </td>
                 <td><?php echo $users['nickname']; ?>  </td>
                 <td><?php echo $users['department']; ?> </td>

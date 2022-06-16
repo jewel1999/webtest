@@ -106,6 +106,11 @@
                 ?>
 
             <div class="mb-3">
+                <label for="id" class="col-form-label">employee #id</label>
+                <input readonly type="text" value="<?= $data['id']?>" class="form-control" name="id">
+            </div>    
+
+            <div class="mb-3">
                 <label for="employee_id" class="col-form-label">employee #id</label>
                 <input readonly type="text" value="<?= $data['employee_id']?>" class="form-control" name="employee_id">
             </div>
