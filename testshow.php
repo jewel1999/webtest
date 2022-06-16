@@ -21,7 +21,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emp information : admin</title>
+    <title>Dashboard : admin</title>
    
     <!-- icon sidebar cdn-->
     <script src="https://unpkg.com/feather-icons"></script> 
@@ -95,11 +95,11 @@
         <button class="btn btn-md btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" 
         data-bs-toggle="dropdown" aria-expanded="false">Hello,admin :)</button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="#">Proflie</a></li>
+            <li><a class="dropdown-item" href="admin_proflie.php">Proflie</a></li>
             <li><a class="dropdown-item" href="#">notification</a></li>
             <li><a class="dropdown-item" href="#">message</a></li>
             <hr>
-            <li><a class="dropdown-item" href="#">logout</a></li>
+            <li><a class="dropdown-item" href="logout.php">logout</a></li>
         </ul>
         </div>
     </div>
@@ -160,21 +160,21 @@
                         
                                     <!-- sidebar icon set -->
                                     <li class="nav-item mt-4"> 
-                                    <a href="#" class="nav-link active" aria-current="page">
+                                    <a href="about.php" class="nav-link active" aria-current="page">
                                     <i data-feather="info" > </i>
                                     <span class="ml-2">about</span>
                                     </a>
                                     </li>
                                     <!-- sidebar icon set -->
                                     <li class="nav-item mt-4"> 
-                                    <a href="#" class="nav-link active" aria-current="page">
+                                    <a href="setting.php" class="nav-link active" aria-current="page">
                                     <i data-feather="settings" > </i>
                                     <span class="ml-2">setting</span>
                                     </a>
                                     </li>
                                     <!-- sidebar icon set -->
                                     <li class="nav-item mt-4"> 
-                                    <a href="#" class="nav-link active" aria-current="page">
+                                    <a href="logout.php" class="nav-link active" aria-current="page">
                                     <i class=" text-danger" data-feather="power" > </i>
                                     <span class="ml-2 text-danger">logout</span>
                                     </a>
@@ -201,7 +201,13 @@
                             <div class="card">
                                 <h5 class="card-header">computer</h5>
                                     <div class="card-body">
-                                    <h5 class="card-title">150 </h5>
+                                        <!---show count rows on display -->
+                                        <?php 
+                                         $pdoQuery = "SELECT * FROM computers" ;
+                                         $pdoResult = $conn->query($pdoQuery);
+                                         $pdoRowCount = $pdoResult->rowCount();
+                                         echo "<h4> $pdoRowCount  </h4>";  
+                                        ?>
                                     <!---add txt for describe -->
                                     <p class="card-text">Feb 4- May 12 ,thailand</p>
                                     <!---add txt for describe -->
@@ -209,13 +215,18 @@
                                     </div>   
                             </div>
                         </div>
-
                         <!-- box for show count row table-->
                         <div class="col-12 col-md-6 col-lg-3 mb-lg-0">
                             <div class="card">
                                 <h5 class="card-header">printer</h5>
                                     <div class="card-body">
-                                    <h5 class="card-title">58 </h5>
+                                    <!---show count rows on display -->
+                                    <?php 
+                                         $pdoQuery = "SELECT * FROM printers" ;
+                                         $pdoResult = $conn->query($pdoQuery);
+                                         $pdoRowCount = $pdoResult->rowCount();
+                                         echo "<h4> $pdoRowCount  </h4>";  
+                                    ?>
                                     <!---add txt for describe -->
                                     <p class="card-text">Feb 4- May 12 ,thailand</p>
                                     <!---add txt for describe -->
@@ -229,7 +240,13 @@
                             <div class="card">
                                 <h5 class="card-header">hardware</h5>
                                     <div class="card-body">
-                                    <h5 class="card-title">244 </h5>
+                                    <!---show count rows on display -->
+                                    <?php 
+                                         $pdoQuery = "SELECT * FROM other_device" ;
+                                         $pdoResult = $conn->query($pdoQuery);
+                                         $pdoRowCount = $pdoResult->rowCount();
+                                         echo "<h4> $pdoRowCount  </h4>";  
+                                    ?>
                                     <!---add txt for describe -->
                                     <p class="card-text">Feb 4- May 12 ,thailand</p>
                                     <!---add txt for describe -->
@@ -243,7 +260,13 @@
                             <div class="card">
                                 <h5 class="card-header">employee</h5>
                                     <div class="card-body">
-                                    <h5 class="card-title">154 </h5>
+                                    <!---show count rows on display -->
+                                    <?php 
+                                         $pdoQuery = "SELECT * FROM employees" ;
+                                         $pdoResult = $conn->query($pdoQuery);
+                                         $pdoRowCount = $pdoResult->rowCount();
+                                         echo "<h4> $pdoRowCount  </h4>";  
+                                    ?>
                                     <!---add txt for describe -->
                                     <p class="card-text">Feb 4- May 12 ,thailand</p>
                                     <!---add txt for describe -->
@@ -255,8 +278,10 @@
                     </div>
 
         <!------------------- started table section ------------------->
-
-                    <table class="table">
+        
+        <div class="card">
+        <h5 class="card-header">recently update</h5>
+        <table class="table">
         <thead>
             <tr>
             <th scope="col">#</th>
@@ -283,8 +308,8 @@
                     foreach  ($users_table as $users) {   // foreach = loop data in table
             ?>
             <tr>
-                <th scope="row"><?php echo $users['id']; ?> </th>
-                <td><?php echo $users['employee_id']; ?>    </td>
+                <th scope="row"><?php echo $users['id'];?> </th>
+                <td><?php echo $users['employee_id']; ?> </td>
                 
                 <td><a href="admin_show_emp.php "><?php echo $users['fname_thai'];?></a></td>
                 <td><?php echo $users['lname_thai'] ;  ?> </td>
@@ -301,24 +326,15 @@
             </div>
         </div>  
         </div>
-            
-                
     </div>
-
-                        <!-- graph -->
-                        <div class="col-12 col-xl-4 mt-2">
-                            <div class="card">
-                            <h5 class="card-header">traffic last week </h5>
-                            <div class="card-body">
-                                <div id="traffic-chart"></div>
-                            </div>
-                        </div>     
-                    </div>
+</div>
+</div>
+                        
                 
                 
                 </div>
                 <footer class="pt-5 d-flex justify-content-between"> 
-                    <span>copyright &copy; 2022 <a href="https://themesberg.com"> jewel sp :)</a></span>
+                    <span class="px-2 ">copyright &copy; 2022 <a href="https://themesberg.com" > jewel sp :)</a></span>
                     <ul class="nav m-0">
                         <li class="nav-item"> 
                             <a href="#" class="nav-link text-secondary" aria-current="page">Privacy Policy </a>
