@@ -1,13 +1,3 @@
-<?php  
-        session_start();
-        require_once '../connect_db.php';
-
-        /*if(!isset($_SESSION['user_login'])){    --ถ้าหากเปิดคอมเม้น จะเข้าใช้งานไม่ได้
-            $_SESSION['error']= 'กรุณาเข้าสู่ระบบ !' ;
-            header('location:index.php');
-        }*/
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,23 +35,19 @@
                         <a class="nav-link " aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item px-4">
-                        <a class="nav-link" href="#">computer</a>
+                        <a class="nav-link" href="user_fin_com.php">computer </a>
                         </li>
                         <li class="nav-item px-2">
-                        <a class="nav-link" href="#">printer</a>
+                        <a class="nav-link" href="user_fin_printer.php">printer</a>
                         </li>
                         <li class="nav-item px-2 ">
-                        <a class="nav-link" href="#">hardware</a>
+                        <a class="nav-link" href="user_fin_other.php">hardware</a>
                         </li>
                         <li class="nav-item px-2">
-                        <a class="nav-link" href="#">repair-notics</a>
-                        </li>
-
-                        <li class="nav-item px-2">
-                        <a class="nav-link" href="#">deviceself system</a>
+                        <a class="nav-link" href="user_fin_rn.php">repair-notics</a>
                         </li>
                 </div>
-                <a href="../logout.php" class="btn ">Logout</a>
+                <button type="button" class="btn border-t-neutral-500" href="logout.php">Logout</button>
                 </nav>
                
 
@@ -89,7 +75,7 @@
                     
                 </div>
                 <div class="image">
-                    <img src="../pic/comservice.jpg" alt="">
+                    <img src="pic\comservice.jpg" alt="">
                 </div>
             </div>
             </div>
@@ -109,7 +95,7 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 <!-- custom js file link  -->
-<script src="../user.js"></script>
+<script src="user.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <!-- home section ends -->

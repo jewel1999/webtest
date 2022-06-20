@@ -32,39 +32,6 @@
     <!-- Place this tag in your head or just before your close body tag. ["garph"] -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
-    <!-- <style>
-        .sidebar{
-            postion:fixed;
-            top:0;
-            bottom:0;
-            left:0;
-            z-index: 100;
-            padding:90px 0 0;
-            box-shadow: inset -1px 0 0 rgba(0,0,0,0.1);
-        }
-
-        @media (max-width: 768px){
-            .sidebar{
-                top : 11.5 rem;
-                padding:0;
-            }
-        }
-
-        .navbar{
-            box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1);
-        }
-
-        @media (min-width: 768px ){
-            .navbar{
-                top:0;
-                position:sticky;
-                z-index:999;
-            }
-        }
-        .sidebar .nav-link{
-            color: #333 ;
-        }
-    </style> -->
 
 </head>
 
@@ -99,7 +66,7 @@
             <li><a class="dropdown-item" href="#">notification</a></li>
             <li><a class="dropdown-item" href="#">message</a></li>
             <hr>
-            <li><a class="dropdown-item" href="logout.php">logout</a></li>
+            <li><a class="dropdown-item" href="../logout.php">logout</a></li>
         </ul>
         </div>
     </div>
@@ -170,7 +137,7 @@
                                     
                                     <!-- sidebar icon set -->
                                     <li class="nav-item mt-4"> 
-                                    <a href="logout.php" class="nav-link active" aria-current="page">
+                                    <a href="../logout.php" class="nav-link active" aria-current="page">
                                     <i class=" text-danger" data-feather="power" > </i>
                                     <span class="ml-2 text-danger">logout</span>
                                     </a>
@@ -377,15 +344,7 @@
     <script src="https://cdn.jsdelivr.net/chartist.js/lastest/Chartlist.min.js"> </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>    
    
-    <script> feather.replace()
-
-    new Chartist.Line('#traffic-chart',{
-        labels:['week 1','week 2','week 3','wekk 4'],
-        series:[
-            [2300,5000,8700,4800]
-        ]
-    }); 
-    </script>
+    <script> feather.replace()</script>
     
 </body>
 </html>

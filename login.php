@@ -62,7 +62,7 @@
 
                 } else {
                     $_SESSION['error']= ' ไม่มีข้อมุลในระบบ ';
-                    header("location : index.php");
+                    header("location :index.php");
                 }
 
 
