@@ -67,17 +67,17 @@
         <div class="row">            
             <div class=" col-md-10 col-lg-8 col-xl-7 mx-auto ">
                 <form action="">
-                    <div class="row position-absolute top-50 start-50 translate-middle">
-                        <div class="col-12 col-md-9 mb-2 md-0">
-                            <input type="email" class="form-control form-control-lg " placeholder="search ..... ">    
+                    <div class="d-flex px-12 translate-middle ">
+                        <div class="align-middle col-md-9 mb-2 md-0">
+                            <input type="text" class="form-control form-control-lg " placeholder="search ..... ">    
                         </div>
                         <div class="col-12 col-md-3">
                             <button type="submit" class="btn btn-block btn-lg btn-primary" > search </button>
                         </div> 
                     </div>
                 </form>
-                <!-- <div class="col-xl-9 mx-auto">
-                <h5 class="mt-5 mb-2">test web-maintain for IT-support describe project for summer internship !  </h5>
+                <div class="col-xl-9 mx-auto">
+                <h5 class="mt-3 mb-2">test web-maintain for IT-support describe project for summer internship !  </h5>
                 </div> -->
             </div>
         </div>
@@ -172,9 +172,85 @@
 </section>
 <!-- image shoecase section end -->
 
+<!-- section admin-team starrted -->
+
+<section class="testimonials text-center bg-light">
+    <div class="container">
+        <h2 class="mb-5 mt-5"> admin it-support</h2>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="testimonials-item mx-auto mb-5 mb-lg-0">
+                    <img src="pic\Basic_Ui__28186_29.jpg" class="img-fluid rounded-circle mb-3" alt="" >
+                    <h5> admin</5>
+                    <p class="font-weight-light mb-0">i'll support your working .</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="testimonials-item mx-auto mb-5 mb-lg-0">
+                    <img src="pic\Basic_Ui__28186_29.jpg" class="img-fluid rounded-circle mb-3" alt="" >
+                    <h5> admin</5>
+                    <p class="font-weight-light mb-0">i'll support your working .</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="testimonials-item mx-auto mb-5 mb-lg-0">
+                    <img src="pic\Basic_Ui__28186_29.jpg" class="img-fluid rounded-circle mb-3" alt="" >
+                    <h5> admin</5>
+                    <p class="font-weight-light mb-0">i'll support your working .</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+     </section>
+
+<!-- section admin-team end -->
+
+
+<!-- footer section started -->
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <h5><i class="fa fa-road"></i> ACME CO INC.</h5>
+                <div class="row">
+                    <div class="col-6">
+                        <ul class="list-unstyled">
+                            <li><a href="">Product</a></li>
+                            <li><a href="">Benefits</a></li>
+                            <li><a href="">Partners</a></li>
+                            <li><a href="">Team</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <ul class="list-unstyled">
+                            <li><a href="">Documentation</a></li>
+                            <li><a href="">Support</a></li>
+                            <li><a href="">Legal Terms</a></li>
+                            <li><a href="">About</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item"><a href="" class="nav-link pl-0"><i class="fa fa-facebook fa-lg"></i></a></li>
+                    <li class="nav-item"><a href="" class="nav-link"><i class="fa fa-twitter fa-lg"></i></a></li>
+                    <li class="nav-item"><a href="" class="nav-link"><i class="fa fa-github fa-lg"></i></a></li>
+                    <li class="nav-item"><a href="" class="nav-link"><i class="fa fa-instagram fa-lg"></i></a></li>
+                </ul>
+                <br>
+            </div>
+        </div>
+    </div>
+</footer>
 
 
 
+
+
+<!-- footer section ended -->
 
 
 
