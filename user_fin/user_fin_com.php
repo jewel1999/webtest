@@ -125,10 +125,7 @@
                             <td><?php echo $computers['com_sn']; ?></td>
                         </tr>
 
-                        <tr>
-                            <th>owner </th>  
-                            <td><?php echo $computers['com_owner']; ?></td>      
-                        </tr>  
+                        
 
                         <tr>
                             <th rowspan="2">Phone</th>

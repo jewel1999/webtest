@@ -1,18 +1,7 @@
 <?php
     session_start();
     require_once '../connect_db.php';
-
-    if(isset($_GET['delete'])){
-        $delete_id = $_GET['delete'];
-        $deletestmt = $conn->query("DELETE FROM printers WHERE id = $delete_id");
-        $deletestmt->execute();
-
-        if($deletestmt){
-            echo"<script> alert('data hasbeen deleted successfully ');  </script>";
-            $_SESSION['success']="data has been deleted sccessfully";
-            header("refresh:1; url=admin_printer.php");
-        }
-    }
+    
 
 ?>
 <!DOCTYPE html>
@@ -21,50 +10,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Computers information : admin</title>
+    <title>Printer edit : admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
 </head>
 <body>
 
-    <div class="modal fade" id="UserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Insert Printer</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>    
+  <div class="container mt-6"> 
 
-        <div class="modal-body">          
-            <form action="admin_insert_printer.php" method="post" enctype="multiplepart/form-data">
-            <div class="mb-3">
-                <label for="printer_sn" class="col-form-label">Printer serial-number :</label>
-                <input type="text" class="form-control" name="printer_sn">
-            </div>
-            <div class="mb-3">
-                <label for="printer_name" class="col-form-label">Printer name :</label>
-                <input type="text" class="form-control" name="printer_name">
-            </div>
-            <div class="mb-3">
-                <label for="printer_owner" class="col-form-label">Printer owner :</label>
-                <input type="text" class="form-control" name="printer_owner">
-            </div>
-            <div class="mb-3">
-                <label for="printer_status" class="col-form-label">Status </label>
-                <input type="text" class="form-control" name="printer_status">
-            </div>
-
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" name="printer_insert" class="btn btn-success">Submit</button>
-        </div>
-            </form>
-           
-        </div>
+        <!-- insert into data forms  -->   
         
-        </div>
-    </div>
-    </div>
 
+    
     <!-- -------------------------- table section-------------------------- -->
 
     
@@ -77,8 +35,7 @@
             <div class="col-md-6">
                     <h1> Printer information </h1>
             </div>
-           
-
+    
         </div>
         <hr>
         <br>
@@ -113,15 +70,15 @@
             </tr>
         </thead>
         <tbody>
-            <?php 
+        <?php 
                 $stmt =$conn->query("SELECT * FROM printers");
                 $stmt->execute(); 
-                $printer_table = $stmt->fetchALL();
+                $users_table = $stmt->fetchALL();
 
-                if(!$printer_table){
-                    echo"<tr> <td colpan='6' class='text-center'> No data found </td> </tr>";
+                if(!$users_table){
+                    echo"<tr><td colpan='6' class='text-center'> No data found </td> </tr>";
                 }else{
-                    foreach  ($printer_table as $printer) {   // foreach = loop data in table
+                    foreach  ($users_table as $printer) {   // foreach = loop data in table
             ?>
             <tr>
                 <th scope="row"><?php echo $printer['id']; ?> </th>
@@ -130,13 +87,76 @@
                 <td><?php echo $printer['printer_owner']; ?>  </td>
                 <td><?php echo $printer['printer_status']; ?> </td>
                 <td><?php echo $printer['create_at']; ?>      </td>       
-                
-                <td>
-                     <a href="admin_edit_printer.php ?id=<?= $printer['id']; ?>"  class="btn btn-info">Show All</a>    
+                <td>   
+                     <a  type="button" class="btn btn-info " data-bs-toggle="modal"  data-bs-target="#ShowModal" >Show All</a>
+                </td>    
             </tr>
-        <?php }} ?>   
+            <?php }} ?>   
         </tbody>
     </table>
+
+
+    <!-- show modal-showmore started-->
+
+        
+                        
+    <div class="modal" tabindex="-1" id="ShowModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Printer Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body" >
+                    <table class="table table-bordered border-primary">
+                    
+                    
+                    
+                    
+                    <?php 
+                        if(isset($_POST['printer_update'])){
+                            $id = $_POST['id'];
+                            $showmore ="SELECT * FROM 'printers' WHERE id=$showmore_run ";
+                            $showmore_run = mysqli_query($conn,$showmore);
+
+                            while($row = mysqli_fetch_array($showmore_run)){
+                                ?>
+                                    <tr>
+                            <th >#id</th>
+                            <td><?php echo $row['id']; ?></td>
+
+                        </tr>
+                            <th>Printers serial-number</th>
+                            <td><?php echo $row['printer_sn']; ?></td>
+
+                        <tr>
+                            <th>Printers name  </th>
+                            <td><?php echo $row['printer_name']; ?></td>
+                        </tr>
+
+                        <tr>
+                            <th>owner </th>  
+                            <td><?php echo $row['printer_owner']; ?></td>      
+                        </tr>  
+
+                        <tr>
+                            <th rowspan="2">Phone</th>
+                            <td>123-45-678</td>
+                        </tr>
+                        <tr>
+                            <td>212</td>
+                        </tr>
+                                <?php
+                            }
+                        }
+                    ?>  
+                    </table>
+                </div>
+                </div>
+            </div>
+            </div>
+    <!-- show modal started-->
             
 </div>
             
@@ -145,3 +165,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>    
 </body>
 </html>
+
+
