@@ -122,7 +122,7 @@
     
     <div class="container mt-3">
     <div class="md-4  d-flex ">
-                <a href="admin.php" type="button" class="btn btn-dark" > back</a >
+                <a href="user_fin.php" type="button" class="btn btn-dark" > back</a >
             </div>
             <br>
         <div class="row">

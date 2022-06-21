@@ -39,7 +39,7 @@
                 /* ------ login to fiancial uers ------- */
                                 }else if ($row['user_role'] == 'user_fin'){
                                     $_SESSION['user_fin'] = $row['id'];
-                                    header("location: ./finance/user_fin.php");
+                                    header("location: ../user_fin/user_fin.php");
                                 }
                 /* ------ login to adminitrator uers ------- */
                                 else if ($row['user_role'] == 'user_adm'){

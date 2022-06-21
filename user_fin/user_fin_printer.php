@@ -70,16 +70,14 @@
     
     <div class="container mt-3">
     <div class="md-4  d-flex ">
-                <a href="admin.php" type="button" class="btn btn-dark" >back</a >
+                <a href="user_fin.php" type="button" class="btn btn-dark" >back</a >
             </div>
             <br>
         <div class="row">
             <div class="col-md-6">
                     <h1> Printer information </h1>
             </div>
-            <div class="col-md-6  d-flex justify-content-end">
-                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UserModal">Insert Printer</button>
-            </div>
+           
 
         </div>
         <hr>
@@ -111,7 +109,7 @@
             <th scope="col">owner</th>
             <th scope="col">status</th>
             <th scope="col">created time</th>
-            <th scope="col">action</th>
+            <th scope="col">more</th>
             </tr>
         </thead>
         <tbody>
@@ -134,9 +132,7 @@
                 <td><?php echo $printer['create_at']; ?>      </td>       
                 
                 <td>
-                     <a href="admin_edit_printer.php ?id=<?= $printer['id']; ?>"  class="btn btn-warning">Edit</a>
-                     <a href="?delete=<?= $printer['id']; ?>"  class="btn btn-danger" onclick="return confirm('are you sure to delete ?')" >Delete</a>
-                </td>    
+                     <a href="admin_edit_printer.php ?id=<?= $printer['id']; ?>"  class="btn btn-info">Show All</a>    
             </tr>
         <?php }} ?>   
         </tbody>

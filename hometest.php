@@ -67,7 +67,7 @@
         <div class="row">            
             <div class=" col-md-10 col-lg-8 col-xl-7 mx-auto ">
                 <form action="">
-                    <div class="d-flex px-12 translate-middle ">
+                    <div class="d-flex flex-col col-12 ">
                         <div class="align-middle col-md-9 mb-2 md-0">
                             <input type="text" class="form-control form-control-lg " placeholder="search ..... ">    
                         </div>
@@ -77,8 +77,8 @@
                     </div>
                 </form>
                 <div class="col-xl-9 mx-auto">
-                <h5 class="mt-3 mb-2">test web-maintain for IT-support describe project for summer internship !  </h5>
-                </div> -->
+                 <h5 class="mt-3 mb-2 bg-light">test web-maintain for IT-support describe project for summer internship !  </h5>
+                </div> 
             </div>
         </div>
     </div>

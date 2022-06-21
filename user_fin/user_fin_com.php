@@ -23,68 +23,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Computers information : admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 </head>
 <body>
-
-    <div class="modal fade" id="UserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Insert Computer</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>    
-
-        <div class="modal-body"> 
-            <form action="admin_insert_com.php" method="post" enctype="multiplepart/form-data">
-            <div class="mb-3">
-                <label for="com_sn" class="col-form-label">Compuster serial-number :</label>
-                <input type="text" class="form-control" name="com_sn">
-            </div>
-            <div class="mb-3">
-                <label for="com_name" class="col-form-label">Compuster name :</label>
-                <input type="text" class="form-control" name="com_name">
-            </div>
-            <div class="mb-3">
-                <label for="com_owner" class="col-form-label">Compuster owner :</label>
-                <input type="text" class="form-control" name="com_owner">
-            </div>
-            <div class="mb-3">
-                <label for="com_status" class="col-form-label">Status :</label>
-                <input type="text" class="form-control" name="com_status">
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" name="com_insert" class="btn btn-success">submit</button>
-        </div>
-            </form>
-           
-        </div>
-        
-        </div>
-    </div>
-    </div>
-
-
-
-
-
     
     <!-- -------------------------- table section-------------------------- -->
 
     
     <div class="container mt-3">
     <div class="md-4  d-flex ">
-                <a href="admin.php" type="button" class="btn btn-dark" > back</a >
+                <a href="user_fin.php" type="button" class="btn btn-dark" > back</a >
             </div>
             <br>
         <div class="row">
             <div class="col-md-6">
                     <h1> Computer information </h1>
             </div>
-            <div class="col-md-6  d-flex justify-content-end">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UserModal">Insert computer </button>
-            </div>
-
+            
         </div>
         <hr>
         <br>
@@ -138,14 +93,61 @@
                 <td><?php echo $computers['create_at']; ?>  </td>       
                 <td> 
                     
-                     <a href="admin_edit_com.php?id=<?= $computers['id']; ?>"  class="btn btn-warning">Edit</a>
-                     <a href="?delete=<?= $computers['id']; ?>"  class="btn btn-danger" onclick="return confirm('are you sure to delete ?')" >Delete</a>
+                     <a  type="button" class="btn btn-secondary " data-bs-toggle="modal"  data-bs-target="#ShowModal"<?= $computers['id']; ?>  >Show more</a>
+                     
                 </td>    
             </tr>
         <?php }} ?>   
         </tbody>
     </table>
             
+    <!-- show modal-showmore started-->
+            <div class="modal" tabindex="-1" id="ShowModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Computer Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body" >
+                    <table class="table table-bordered border-primary">
+                        <tr>
+                            <th>#id</th>
+                            <td><?php echo $computers['id']; ?></td>
+
+                        </tr>
+                            <th>Computer name </th>
+                            <td><?php echo $computers['com_name']; ?></td>
+
+                        <tr>
+                            <th>Computer serial-number </th>
+                            <td><?php echo $computers['com_sn']; ?></td>
+                        </tr>
+
+                        <tr>
+                            <th>owner </th>  
+                            <td><?php echo $computers['com_owner']; ?></td>      
+                        </tr>  
+
+                        <tr>
+                            <th rowspan="2">Phone</th>
+                            <td>123-45-678</td>
+                        </tr>
+
+                        <tr>
+                            <td>212</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+            </div>
+    <!-- show modal started-->
 </div>
             
     
