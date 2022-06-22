@@ -6,6 +6,14 @@
         $com_name = $_POST['com_name'];
         $com_owner = $_POST['com_owner'];
         $com_status  = $_POST['com_status'];
+        $cpu =$_POST['cpu'];
+        $ram =$_POST['harddisk'];
+        $harddisk =$_POST['harddisk'];
+        $brand =$_POST['brand'];
+        $modelcom =$_POST['modelcom'];
+        $license =$_POST['license'];
+        $price =$_POST['price'];
+        $com_type = $_POST['com_type'];
 
         if(!isset($_SESSION['error'])){
         try {
@@ -14,12 +22,19 @@
             $check_com_sn->execute();
             $row = $check_com_sn->fetch(PDO::FETCH_ASSOC);
 
-                $stmt = $conn->prepare("INSERT INTO computers(com_sn,com_name,com_owner,com_status)
-                                        VALUES (:com_sn,:com_name,:com_owner,:com_status)");
+                $stmt = $conn->prepare("INSERT INTO computers(com_sn,com_name,com_owner,com_status,cpu,harddisk,modelcom,brand,license,com_type,price)
+                                        VALUES (:com_sn,:com_name,:com_owner,:com_status,:cpu,:harddisk,:modelcom,:brand,:license,:com_type,:price)");
                 $stmt->bindParam(":com_sn",$com_sn);
                 $stmt->bindParam(":com_name",$com_name);
                 $stmt->bindParam(":com_owner",$com_owner);
                 $stmt->bindParam(":com_status",$com_status);
+                $stmt->bindParam(":cpu",$cpu);
+                $stmt->bindParam(":harddisk",$harddisk);
+                $stmt->bindParam(":modelcom",$modelcom);
+                $stmt->bindParam(":brand",$brand);
+                $stmt->bindParam(":license",$license);
+                $stmt->bindParam(":com_type",$com_type);
+                $stmt->bindParam(":price",$price);
                 $stmt->execute();
                 $_SESSION['success'] = "data has been inserted sucessfully! " ;
                 header("location: admin_com.php");

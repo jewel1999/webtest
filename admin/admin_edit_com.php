@@ -2,21 +2,35 @@
     session_start();
     require_once "../connect_db.php";
     if(isset($_POST['com_update'])){
-        $id = $_POST['id'];
         $com_sn = $_POST['com_sn'];
         $com_name = $_POST['com_name'];
         $com_owner = $_POST['com_owner'];
         $com_status  = $_POST['com_status'];
+        $cpu =$_POST['cpu'];
+        $ram =$_POST['harddisk'];
+        $brand =$_POST['brand'];
+        $modelcom =$_POST['modelcom'];
+        $price =$_POST['price'];
+        $license =$_POST['license'];
+        $com_type = $_POST['com_type'];
     
                 if(!isset($_SESSION['error'])){
-                    $sql = $conn->prepare("UPDATE computers SET com_sn=:com_sn,com_name=:com_name,
+                    $sql = $conn->prepare("UPDATE computers SET com_sn=:com_sn,com_name=:com_name,cpu=:cpu,
+                    harddisk=:harddisk,modelcom=:modelcom,brand=:brand,license=:license,com_type=:com_type,price=:price,
                     com_owner=:com_owner,com_status=:com_status WHERE id=:id ");
-                    $sql->bindParam(":id",$id);
-                    $sql->bindParam(":com_sn",$com_sn);
-                    $sql->bindParam(":com_name",$com_name);
-                    $sql->bindParam(":com_owner",$com_owner);
-                    $sql->bindParam(":com_status",$com_status);
-                    $sql->execute();
+                   $sql->bindParam(":com_sn",$com_sn);
+                   $sql->bindParam(":com_name",$com_name);
+                   $sql->bindParam(":com_owner",$com_owner);
+                   $sql->bindParam(":com_status",$com_status);
+                   $sql->bindParam(":cpu",$cpu);
+                   $sql->bindParam(":harddisk",$harddisk);
+                   $sql->bindParam(":modelcom",$modelcom);
+                   $sql->bindParam(":brand",$brand);
+                   $sql->bindParam(":license",$license);
+                   $sql->bindParam(":price",$price);
+                   $sql->bindParam(":com_type",$com_type);
+                   $sql->execute();
+                 
 
                     $_SESSION['success'] = "Update sucessfully! " ;
                     header("location:admin_com.php");     
@@ -80,12 +94,59 @@
                 <input type="text" value="<?= $data['com_owner']?>" class="form-control" name="com_owner">
             </div>
             <div class="mb-3">
+                <label for="cpu" class="col-form-label">CPU </label>
+                <input type="text"  value="<?= $data['cpu']?>" class="form-control" name="cpu">
+            </div>
+
+            <div class="mb-3">
+                <label for="ram" class="col-form-label">RAM</label>
+                <input type="text"  value="<?= $data['ram']?>" class="form-control" name="ram">
+            </div>
+            <div class="mb-3">
+                <label for="harddisk" class="col-form-label">Harddisk</label>
+                <input type="text"  value="<?= $data['harddisk']?>" class="form-control" name="harddisk">
+            </div>
+            <div class="mb-3">
+                <label for="brand" class="col-form-label">Brand</label>
+                <input type="text"  value="<?= $data['brand']?>" class="form-control" name="brand">
+            </div>
+
+            <div class="mb-3">
+                <label for="modelcom" class="col-form-label">Model</label>
+                <input type="text"  value="<?= $data['modelcom']?>" class="form-control" name="modelcom">
+            </div>
+
+            <div class="mb-3">
+                <label for="license" class="col-form-label">License</label>
+                <input type="text"  value="<?= $data['license']?>" class="form-control" name="license">
+            </div>
+
+            <div class="mb-3">
+                <label for="price" class="col-form-label">Price</label>
+                <input type="text"  value="<?= $data['price']?>" class="form-control" name="price">
+            </div>
+            <div class="mb-3">
+                <label for="com_type" class="col-form-label">Computer type</label>
+                <select class="form-select" id="inputGroupSelect01" name="com_type"  
+                value="<?= $data['com_type']?>" >
+                    <option selected>select type</option>
+                    <option value="all-in-one">all-in-one</option>
+                    <option value="pc-laptop">pc-laptop</option>
+                    <option value="notebook">notebook</option>
+                </select>
+                
+            </div>
+            <div class="mb-3">
                 <label for="com_status" class="col-form-label">Status :</label>
-                <input type="text"  value="<?= $data['com_status']?>" class="form-control" name="com_status">
+                <select class="form-select" id="inputGroupSelect01" name="com_status">
+                    <option selected><?= $data['com_status']?></option>
+                    <option value="active">active</option>
+                    <option value="empty">empty</option>
+                </select>
             </div>
 
             <div class="modal-footer">
-            <a type="button" class="btn btn-secondary" href="admin_com.php">Close</a>
+            <a type="button" class="btn btn-danger" href="admin_com.php">Close</a>
             <button type="submit" name="com_update" class="btn btn-success"  >Update</button>
         </div>
             </form>

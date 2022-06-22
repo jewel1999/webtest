@@ -37,6 +37,7 @@
     <style>
         .container{
             max-width:1000px;
+           
         }
 
         p {
@@ -56,7 +57,9 @@
                 ?>
   
             <!-- show modal-showmore started-->
-            <div class="container ">
+           
+            <div class="container mt-4"  style="font-size:12px;" >
+            
             <table class=" table table-bordered border-primary ">
                         <tr>
                             <th>#id</th>
