@@ -35,21 +35,21 @@
                 /* ------ login to admin ------- */
                                 if($row['user_role'] == 'admin'){
                                     $_SESSION['admin_login']=$row['id'];
-                                    header("location: ../webtest/admin/admin.php");
+                                    header("location: /webtest/admin/admin.php");
                 /* ------ login to fiancial uers ------- */
                                 }else if ($row['user_role'] == 'user_fin'){
                                     $_SESSION['user_fin'] = $row['id'];
-                                    header("location: ../user_fin/user_fin.php");
+                                    header("location: /webtest/user_fin/user_fin.php");
                                 }
                 /* ------ login to adminitrator uers ------- */
                                 else if ($row['user_role'] == 'user_adm'){
                                     $_SESSION['user_adm'] = $row['id'];
-                                    header("location: ../user_adm/user_adm.php");
+                                    header("location:/webtest/user_adm/user_adm.php");
                                 }
                 /* ------ login to human-resource uers ------- */
                                 else if ($row['user_role'] == 'user_hrm'){
                                     $_SESSION['user_hrm'] = $row['id'];
-                                    header("location: ../user_hrm/user_hrm.php");
+                                    header("location: /webtest/user_hrm/user_hrm.php");
                                 }
                             }else{
                                 $_SESSION['error']='Invalid  password';

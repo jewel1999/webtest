@@ -2,12 +2,17 @@
     session_start();
     require_once '../connect_db.php';
 
-    if(isset($_GET['com_insert'])){
-        $com_sn = $_GET['com_sn'];
-        $com_name = $_GET['com_name'];
-        $com_owner = $_GET['com_owner'];
-        $com_status  = $_GET['com_status'];}
-        
+    if(isset($_GET['delete'])){
+        $delete_id = $_GET['delete'];
+        $deletestmt = $conn->query("DELETE FROM computers WHERE id = $delete_id");
+        $deletestmt->execute();
+
+        if($deletestmt){
+            echo"<script> alert('data hasbeen deleted successfully ');  </script>";
+            $_SESSION['success']="data has been deleted sccessfully";
+            header("refresh:1; url=admin_com.php");
+        }
+    }
 
 ?>
 <!DOCTYPE html>
@@ -21,19 +26,65 @@
 </head>
 <body>
 
+    <div class="modal fade" id="UserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Insert Computer</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>    
+
+        <div class="modal-body"> 
+            <form action="admin_insert_com.php" method="post" enctype="multiplepart/form-data">
+            <div class="mb-3">
+                <label for="com_sn" class="col-form-label">Compuster serial-number :</label>
+                <input type="text" class="form-control" name="com_sn">
+            </div>
+            <div class="mb-3">
+                <label for="com_name" class="col-form-label">Compuster name :</label>
+                <input type="text" class="form-control" name="com_name">
+            </div>
+            <div class="mb-3">
+                <label for="com_owner" class="col-form-label">Compuster owner :</label>
+                <input type="text" class="form-control" name="com_owner">
+            </div>
+            <div class="mb-3">
+                <label for="com_status" class="col-form-label">Status :</label>
+                <input type="text" class="form-control" name="com_status">
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" name="com_insert" class="btn btn-success">submit</button>
+        </div>
+            </form>
+           
+        </div>
+        
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+    
     <!-- -------------------------- table section-------------------------- -->
 
     
     <div class="container mt-3">
     <div class="md-4  d-flex ">
-                <a href="user_fin.php" type="button" class="btn btn-dark" > back</a >
+                <a href="admin.php" type="button" class="btn btn-dark" > back</a >
             </div>
             <br>
         <div class="row">
             <div class="col-md-6">
                     <h1> Computer information </h1>
             </div>
-        
+            <div class="col-md-6  d-flex justify-content-end">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UserModal">Insert computer </button>
+            </div>
+
         </div>
         <hr>
         <br>
@@ -87,8 +138,8 @@
                 <td><?php echo $computers['create_at']; ?>  </td>       
                 <td> 
                     
-                     <a href="user_fin_update_com.php? id=<?= $computers['id']; ?>"  class="btn btn-secondary">More</a>
-                    
+                     <a href="admin_edit_com.php?id=<?= $computers['id']; ?>"  class="btn btn-warning">Edit</a>
+                     <a href="?delete=<?= $computers['id']; ?>"  class="btn btn-danger" onclick="return confirm('are you sure to delete ?')" >Delete</a>
                 </td>    
             </tr>
         <?php }} ?>   

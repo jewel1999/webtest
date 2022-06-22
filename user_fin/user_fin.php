@@ -15,44 +15,32 @@
 <!--navbar header -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light px-4 mt-3">
   <div class="container-fluid">
-    <a class="navbar-brand px-4" href="#">IT-Suport</a>
+    <a class="navbar-brand px-4" href="#">IT-Support</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="#">หน้าแรก</a>
         </li>
-
         <li class="nav-item">
-          <a class="nav-link" href="user_fin_emp.php">Phone directory</a>
+          <a class="nav-link" href="user_fin_emp.php">สมุดโทรศัพท์</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="user_fin_emp.php">ข้อมูลพนักงาน</a>
         </li>
         
-        <li class="nav-item">
-          <a class="nav-link" href="user_fin_com.php">Computer</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="user_fin_printer.php">Printer</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="user_fin_other.php">Hardware</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" href="user_fin_emp.php">Employees</a>
-        </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Service
+            ข้อมูลอุปกรณ์
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">daviceself system</a></li>
-            <li><a class="dropdown-item" href="user_fin_rn.php">repair notics</a></li>
-            <li><a class="dropdown-item" href="#">documentation</a></li>
+            <li><a class="dropdown-item" href="user_fin_com.php">Computer</a></li>
+            <li><a class="dropdown-item" href="user_fin_printer.php">Printer</a></li>
+            <li><a class="dropdown-item" href="user_fin_other.php">Hardware</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">contact</a></li>
+            <li><a class="dropdown-item" href="user_rin_rn.php">ใบแจ้งซ่อม</a></li>
             </ul>
         </li>
         
@@ -75,10 +63,10 @@
                 <form action="">
                     <div class="d-flex flex-col  mx-auto">
                         <div class="align-middle col-md-9 mb-2 md-0 ">
-                            <input type="text" class="form-control form-control-lg " placeholder="search ..... ">    
+                            <input type="text" class="form-control form-control-lg " placeholder="ค้นหาที่นี่ ..... ">    
                         </div>
                         <div class="col-12 col-md-3">
-                            <button type="submit" class="btn btn-block btn-lg btn-primary" > search </button>
+                            <button type="submit" class="btn btn-block btn-lg btn-primary" > Search </button>
                         </div> 
                     </div>
                 </form>
@@ -182,7 +170,7 @@
 
 <section class="testimonials text-center bg-light">
     <div class="container">
-        <h2 class="mb-5 mt-5"> admin it-support</h2>
+        <h2 class="mb-5 mt-5">admin it-support</h2>
         <div class="row">
             <div class="col-lg-4">
                 <div class="testimonials-item mx-auto mb-5 mb-lg-0">
