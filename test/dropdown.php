@@ -9,9 +9,7 @@
 </head>
 <body>
 
-     <div class="mb-t" class="mb-5 mt-4 middle position ">
-            <?php  $sql= $_conn ->insert('department') ?>  
-    </div>
+ 
 
     <script>  
     

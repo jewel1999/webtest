@@ -19,6 +19,7 @@ try {
 }
 
 /* for dropdown dynamic selected */
+ 
   function runQuery($query){
     $result = mysqli_query($this->conn,$query);
     while ($row=mysqli_fetch_assoc($result)){
@@ -43,6 +44,7 @@ try {
       }
     }
   }
+/* for dropdown dynamic selected ended */
 
 
 ?>
