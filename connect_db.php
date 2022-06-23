@@ -17,7 +17,37 @@ try {
 } catch(PDOException $e) {
   echo "Connection failed: " . $e->getMessage();
 }
+
+/* for dropdown dynamic selected */
+  function runQuery($query){
+    $result = mysqli_query($this->conn,$query);
+    while ($row=mysqli_fetch_assoc($result)){
+      $resultset[]=$row;
+    }
+    if(!empty($resultset)){
+      return $resultset;
+    }
+    function numRow($query){
+      $result = mysqli_query($this->conn,$query);
+      while ($row=mysqli_fetch_assoc($result)){
+        $resultset[] =$row;
+      }
+      if(!empty($resultset)){
+        return $resultset;
+      }
+
+      function numRows ($query){
+        $result = mysqli_query($this->conn,$query);
+        $rowcount = mysqli_num_rows($result);
+        return $rowcount;
+      }
+    }
+  }
+
+
 ?>
+
+
 
 
 
