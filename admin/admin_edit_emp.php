@@ -168,7 +168,7 @@
             </div>
            
             <div class="mb-3">
-                <label for="workline" class="col-form-label">สายารทำงาน (workline)</label>
+                <label for="workline" class="col-form-label">สายการทำงาน (workline)</label>
                 <input type="text" value="<?= $data['workline']?>" class="form-control" name="workline">
             </div>
             
@@ -182,9 +182,12 @@
                 <input type="text"  value="<?= $data['department_eng']?>" class="form-control" name="department_eng">
             </div>
 
-            <div class="mb-3">
-                <label for="status_user" class="col-form-label">สถานะพนักงาน</label>
-                <input type="text"  value="<?= $data['status_user']?>" class="form-control" name="status_user">
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">สถานะพนักงาน</label>
+                <select class="form-control" id="exampleFormControlSelect1" value="<?= $data['status_user']?>" class="form-control" name="status_user">
+                <option >Active</option>
+                <option>No-Active</option>
+                </select>
             </div>
 
             <div class="mb-3">

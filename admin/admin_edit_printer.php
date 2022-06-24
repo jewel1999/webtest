@@ -79,10 +79,17 @@
                 <label for="printer_owner" class="col-form-label">Printer owner :</label>
                 <input type="text" value="<?= $data['printer_owner']?>" class="form-control" name="printer_owner">
             </div>
-            <div class="mb-3">
-                <label for="printer_status" class="col-form-label">Status :</label>
-                <input type="text"  value="<?= $data['printer_status']?>" class="form-control" name="printer_status">
+
+
+            <div class="form-group">
+                <label for="exampleFormControlSelect1"></label>
+                <select class="form-control" id="exampleFormControlSelect1" value="<?= $data['printer_status']?>" class="form-control" name="printer_status">
+                <option >Active</option>
+                <option>Empty</option>
+                </select>
             </div>
+
+            
 
             <div class="modal-footer">
             <a type="button" class="btn btn-secondary" href="admin_printer.php">Close</a>
