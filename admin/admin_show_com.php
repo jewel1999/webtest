@@ -2,18 +2,6 @@
     session_start();
     require_once "../connect_db.php";
 
-    if(isset($_POST['com_insert'])){
-        $com_sn = $_POST['com_sn'];
-        $com_name = $_POST['com_name'];
-        $com_owner = $_POST['com_owner'];
-        $com_status  = $_POST['com_status'];
-        $cpu =$_POST['cpu'];
-        $ram =$_POST['harddisk'];
-        $brand =$_POST['brand'];
-        $model =$_POST['model'];
-        $license =$_POST['$license'];
-        $com_type = $_POST['com_type'];
-}
         
         /* ------end of update section ------- */
 
@@ -39,7 +27,7 @@
 <?php 
                     if(isset($_GET['id'])){
                         $id = $_GET['id'];
-                        $stmt = $conn->query("SELECT * FROM computers WHERE id = $id");
+                        $stmt = $conn->query("SELECT * FROM  WHERE id = $id");
                         $stmt->execute();
                         $data = $stmt->fetch();
                     }

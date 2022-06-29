@@ -108,6 +108,7 @@
 
             <!-- Departmant line Dynamic dropdown ended -->
 
+
             <div class="mb-3">
                 <label for="department_eng" class="col-form-label">แผนก(ภาษาอักฤษ)</label>
                 <input type="text" class="form-control" name="department_eng">
@@ -187,7 +188,10 @@
         </thead>
         <tbody>
             <?php 
-                $stmt =$conn->query("SELECT * FROM employees");
+                $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
+                LEFT JOIN department ON employees.department=department.id
+                LEFT JOIN  workline ON employees.workline=workline.id
+                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id");
                 
                 $stmt->execute(); 
               
@@ -202,10 +206,10 @@
                 <th scope="row"><?php echo $users['id']; ?> </th>
                 <td><?php echo $users['employee_id']; ?>    </td>
                 
-                <td><a href="admin_show_emp.php "><?php echo $users['fname_thai'];?></a></td>
+                <td><a href="admin_show_emp.php"><?php echo $users['fname_thai'];?></a></td>
                 <td><?php echo $users['lname_thai'] ;  ?> </td>
                 <td><?php echo $users['nickname']; ?>  </td>
-                <td><?php echo $users['department']; ?> </td>
+                <td><?php echo $users['department_thai']; ?> </td>
                 <td><?php echo $users['phone']; ?>  </td>     
                 <td><?php echo $users['extn']; ?>  </td>          
                 <td> 

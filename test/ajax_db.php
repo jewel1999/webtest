@@ -2,8 +2,8 @@
 include_once("../connect_db.php");
 
 if (isset($_POST['function']) && $_POST['function'] == 'provinces') {
-  $id = $_POST['id'];
-  $sql = "SELECT * FROM workline WHERE workline_id='$id'";
+  $id = $_POST['workgroup_id'];
+  $sql = "SELECT * FROM workline WHERE workgroup_id='$id'";
   $query = $conn->prepare($sql);
   $query->execute();
   // $query = mysqli_query($con, $sql);
