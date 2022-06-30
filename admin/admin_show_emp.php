@@ -3,16 +3,25 @@
     require_once "../connect_db.php";
 
     if(isset($_POST['com_insert'])){
-        $com_sn = $_POST['com_sn'];
-        $com_name = $_POST['com_name'];
-        $com_owner = $_POST['com_owner'];
-        $com_status  = $_POST['com_status'];
-        $cpu =$_POST['cpu'];
-        $ram =$_POST['harddisk'];
-        $brand =$_POST['brand'];
-        $model =$_POST['model'];
-        $license =$_POST['$license'];
-        $com_type = $_POST['com_type'];
+        $employee_id = $_POST['employee_id'];
+                        $fname_thai = $_POST['fname_thai'];
+                        $lname_thai = $_POST['lname_thai'];
+                        $fname_eng = $_POST['fname_eng'];
+                        $lname_eng = $_POST['lname_eng'];
+                        $nickname = $_POST['nickname'];
+                        $floor_  = $_POST['floor_'];
+                        $extn  = $_POST['extn'];
+                        $usermail  = $_POST['usermail'];
+                        $phone  = $_POST['phone'];
+                        $sex  = $_POST['sex'];
+                        $workgroup  = $_POST['workgroup'];
+                        $workline  = $_POST['workline'];
+                        $department  = $_POST['department'];
+                        $department_eng  = $_POST['department_eng'];
+                        $status_user = $_POST['status_user'];
+                        $station  = $_POST['station'];
+       
+        
 }
         
         /* ------end of update section ------- */
@@ -39,6 +48,8 @@
 <?php 
                     if(isset($_GET['id'])){
                         $id = $_GET['id'];
+                       
+                        
                         $stmt = $conn->query("SELECT * FROM employees WHERE id = $id");
                         $stmt->execute();
                         $data = $stmt->fetch();

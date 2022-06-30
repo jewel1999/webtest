@@ -150,6 +150,8 @@
                 <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UserModal">Insert Employee </button>
             </div>
 
+            
+
         </div>
         <hr>
         <br>
@@ -214,7 +216,10 @@
                 <td><?php echo $users['extn']; ?>  </td>          
                 <td> 
                 
-                    <a href="admin_show_emp.php ?id=<?= $users['id']; ?>"  class="btn btn-secondary">More</a>
+                
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#UserModalShowstaff">More</button>
+            
+
                     <a href="admin_edit_emp.php ?id=<?= $users['id']; ?>"  class="btn btn-warning">Edit</a>
                     <a href="?delete=<?= $users['id']; ?>"  class="btn btn-danger" onclick="return confirm('are you sure to delete ?')" >Delete</a>
                 </td>    
@@ -224,7 +229,7 @@
     </table>
             
 </div>
-            
+
     
 <?php include_once('script.php'); ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>    

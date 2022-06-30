@@ -1,3 +1,22 @@
+<?php
+    session_start();
+    require_once "../connect_db.php";
+
+ /*   if(!isset($_SESSION['user_login'])){   
+            $_SESSION['error']= 'กรุณาเข้าสู่ระบบ !' ;
+            header('location:index.php');
+        }else if(isset($_SESSION['user_hrm'])){   
+            $_SESSION['error']= 'กรุณาเข้าสู่ระบบ !' ;
+            header('location:index.php');
+        }else if(isset($_SESSION['user_adm'])){   
+            $_SESSION['error']= 'กรุณาเข้าสู่ระบบ !' ;
+            header('location:index.php');
+        }else if(isset($_SESSION['user_fin'])){   
+            $_SESSION['error']= 'กรุณาเข้าสู่ระบบ !' ;
+            header('location:index.php');
+        }*/
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!--divinectorweb.com-->
