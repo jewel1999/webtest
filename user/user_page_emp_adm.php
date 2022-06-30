@@ -1,254 +1,330 @@
+<?php
+    session_start();
+    require_once '../connect_db.php';
+
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
-<!--divinectorweb.com-->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="../hometest.css">
+    <title>Staff information : ข้อมูลพนักงาน [Show all]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
 
-<!--navbar header -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light px-4 mt-3">
-  <div class="container-fluid">
-    <a class="navbar-brand px-4" href="#">IT-Support</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">หน้าแรก</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="user_fin_emp.php">สมุดโทรศัพท์</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="user_fin_emp.php">ข้อมูลพนักงาน</a>
-        </li>
+    <!-- -------------------------- table section-------------------------- -->
+ 
+    <div class="container mt-3">
+    <div class="md-12  d-flex ">
+                <a href="user_home.php" type="button" class="btn btn-dark" >back</a >
+            </div>
+            <br>
+        <div class="row">
+            <div class="col-md-12">
+                    <h1> Staff information </h1>
+                    <p class="text-secondary" >all user</p>
+
+                  <br>
+                    <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="ค้นหาข้อมูลพนักงาน" 
+                    aria-label="Search" id="SearchData">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <br>
+                <br>
+          
+
+    <!--  --------------User data---------------------- -->
+    <table class="table ">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">รหัสพนักงาน</th>
+            <th scope="col">ชื่อ-สกุล (ภาษาไทย)</th>   
+            <th scope="col">ชื่อเล่น</th>
+            <th scope="col">แผนก</th>
+            <th scope="col">เบอร์โทรศัพท์</th>
+            <th scope="col">หมายเลขภายใน</th>
+            <th scope="col">#</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+                $stmt =$conn->query("SELECT * FROM employees");
+                $stmt->execute(); 
+                $users_table = $stmt->fetchALL();
+
+                if(!$users_table){
+                    echo"<tr><td colpan='6' class='text-center'> No data found </td> </tr>";
+                }else{
+                    foreach  ($users_table as $users) {   // foreach = loop data in table
+            ?>
+            <tr>
+                <th scope="row"><?php echo $users['id']; ?> </th>
+                <td><?php echo $users['employee_id']; ?>    </td>
+                
+                <td><a href="admin_show_emp.php "><?php echo $users['fname_thai'];?></a>&nbsp;<?php echo $users['lname_thai'] ;  ?></td>
+                
+                <td><?php echo $users['nickname']; ?>  </td>
+                <td><?php echo $users['department']; ?> </td>
+                <td><?php echo $users['phone']; ?>  </td>     
+                <td><?php echo $users['extn']; ?>  </td>          
+                <td>
+                
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#UserModalShowstaff">More </button>
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#UserModalUpdateStaff">Update</button>   
+                </td>    
+                        
+            </tr>
+        <?php }} ?>   
+        </tbody>
+    </table>
+    </div> 
+</div>
+</div>
+</div>
+            
+<!-- Modal staff info table  -->
+<div class="modal fade" id="UserModalShowstaff" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Insert Department table</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>    
+
+        <div class="modal-body"> 
+
+        <!-- start table -->
+        <?php 
+                    if(isset($_GET['id'])){
+                        $id = $_GET['id'];
+                        $stmt = $conn->query("SELECT * FROM  WHERE id = $id");
+                        $stmt->execute();
+                        $data = $stmt->fetch();
+                    }
+                ?>
+
+<?php 
+                $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
+                LEFT JOIN department ON employees.department=department.id
+                LEFT JOIN  workline ON employees.workline=workline.id
+                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='12' "  );
+                
+                $stmt->execute(); 
+              
+                $users_table = $stmt->fetchALL();
+
+                if(isset($_GET['id'])){
+                    $id = $_GET['id'];
+                }else{
+                    foreach  ($users_table as $users ) {   // foreach = loop data in table
+            ?>
+                    
+                    <div class="contianer">
+                        <table class="  border-primary ">
+                        <tr>
+                            <th>staff id</th>
+                            <td><?php echo $users['employee_id']; ?></td>
+
+                        </tr>
+                            <th>ชื่อจริง (ภาษาไทย) </th>
+                            <td><?php echo $users['fname_thai']; ?></td>
+
+                        <tr>
+                            <th>นามสกุล (ภาษาไทย)</th>
+                            <td><?php echo $users['lname_thai']; ?></td>
+                        </tr>
+
+                        <tr>
+                            <th>ชื่อ (ภาษาอังกฤษ)</th>
+                            <td><?php echo $users['fname_eng']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>นามสกุล (ภาษาอังกฤษ)</th>
+                            <td><?php echo $users['lname_eng']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>ชื่อเล่น</th>
+                            <td><?php echo $users['nickname']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>ชั้น</th>
+                            <td><?php echo $users['floor_']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>เบอร์ติดต่อ</th>
+                            <td><?php echo $users['phone']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>เบอร์ติดต่อภายใน</th>
+                            <td><?php echo $users['extn']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>อีเมลล์ผู้ใช้งาน</th>
+                            <td><?php echo $users['usermail']; ?></td>
+                        </tr>
+
+                        <tr>
+                            <th>ส่วนการทำงาน</th>
+                            <td><?php echo $users['workgroup_name']; ?></td>
+                        </tr>
+                        
+                        <tr>
+                            <th>สายการทำงาน</th>
+                            <td><?php echo $users['workline_name']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>แผนก</th>
+                            <td><?php echo $users['department_thai']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>แผนก (ภาษาอังกฤษ)</th>
+                            <td><?php echo $users['department_eng']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>สถานะพนักงาน </th>
+                            <td><?php echo $users['status_user']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>station</th>
+                            <td><?php echo $users['station']; ?></td>
+                        </tr>
+
+                    </table>
+                    <?php }} ?>   
+           
+        </div>
         
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            ข้อมูลอุปกรณ์
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="user_fin_com.php">Computer</a></li>
-            <li><a class="dropdown-item" href="user_fin_printer.php">Printer</a></li>
-            <li><a class="dropdown-item" href="user_fin_other.php">Hardware</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="user_rin_rn.php">ใบแจ้งซ่อม</a></li>
-            </ul>
-        </li>
-        
-      </ul>
-        
-        <button class="btn btn-outline-danger" type="logout" href="logout.php" >logout</button>
-      
+        </div>
     </div>
-  </div>
-</nav>
-<!--navbar header end -->
+    </div>   
 
 
     
-<!--slide header started -->
-<header class=" text-black text-center">
-    <div class="container mt-6">
-        <div class="row">            
-            <div class=" col-md-10 col-lg-8 col-xl-7 mx-auto ">
-                <form action="">
-                    <div class="d-flex flex-col  mx-auto">
-                        <div class="align-middle col-md-9 mb-2 md-0 ">
-                            <input type="text" class="form-control form-control-lg " placeholder="ค้นหาที่นี่ ..... ">    
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <button type="submit" class="btn btn-block btn-lg btn-primary" > Search </button>
-                        </div> 
-                    </div>
-                </form>
-                <div class="col-xl-9 mx-auto">
-                 <h5 class="mt-3 mb-2 bg-light  text-secondary">you can all serch for name,phone,department etc.</h5>
-                </div> 
-            </div>
-        </div>
-    </div>
-</header>
-<!--slide header end -->
+   <!-- Modal staff info table  -->
+<div class="modal fade" id="UserModalUpdateStaff" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Insert Department table</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>    
 
+        <div class="modal-body"> 
 
-<!-- features icons started -->
+        <!-- start table -->
+        <?php 
+                    if(isset($_GET['id'])){
+                        $id = $_GET['id'];
+                        $stmt = $conn->query("SELECT * FROM  WHERE id = $id");
+                        $stmt->execute();
+                        $data = $stmt->fetch();
+                    }
+                ?>
 
-<section class="feature-icons bg-light text-center">
-    <div class="container">
-    <div class="row">
+<?php 
+                $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
+                LEFT JOIN department ON employees.department=department.id
+                LEFT JOIN  workline ON employees.workline=workline.id
+                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='12' "  );
+                
+                $stmt->execute(); 
+              
+                $users_table = $stmt->fetchALL();
 
-        <!-- #1 -->
-        <div class="col-lg-4">
-            <div class="feature-icons-item mx-auto mb-5 mb-lg-3">
-                <div class="feature-icons-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
-                    <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V6.5z"/>
-                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
-                    </svg>
-                </div>
-                <h5 href="users\user_document.php">documentation</h5>
-                <p >all flie download for everyone <br> and can upload file to admin</p>
+                if(isset($_GET['id'])){
+                    $id = $_GET['id'];
+                }else{
+                    foreach  ($users_table as $users ) {   // foreach = loop data in table
+            ?>
+                    
+                    <div class="contianer">
+                        <table class="  border-primary ">
+                        <tr>
+                            <th>staff id</th>
+                            <td><?php echo $users['employee_id']; ?></td>
 
-            </div>
-        </div>
-        <!-- #2 -->
-        <div class="col-lg-4">
-            <div class="feature-icons-tem mx-auto mb-5 mb-lg-3">
-                <div class="feature-icons-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-motherboard" viewBox="0 0 16 16">
-                    <path d="M11.5 2a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5Zm2 0a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5Zm-10 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1h-6Zm0 2a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1h-6ZM5 3a1 1 0 0 0-1 1h-.5a.5.5 0 0 0 0 1H4v1h-.5a.5.5 0 0 0 0 1H4a1 1 0 0 0 1 1v.5a.5.5 0 0 0 1 0V8h1v.5a.5.5 0 0 0 1 0V8a1 1 0 0 0 1-1h.5a.5.5 0 0 0 0-1H9V5h.5a.5.5 0 0 0 0-1H9a1 1 0 0 0-1-1v-.5a.5.5 0 0 0-1 0V3H6v-.5a.5.5 0 0 0-1 0V3Zm0 1h3v3H5V4Zm6.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2Z"/>
-                    <path d="M1 2a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-2H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 9H1V8H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6H1V5H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 2H1Zm1 11a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v11Z"/>
-                    </svg>
-                </div>
-                <h5>hardware-shelf system</h5>
-                <p >hardware-shelf </p>
+                        </tr>
+                            <th>ชื่อจริง (ภาษาไทย) </th>
+                            <td><?php echo $users['fname_thai']; ?></td>
 
-            </div>
-        </div>
-        <!-- #3 -->
-        <div class="col-lg-4">
-            <div class="feature-icons-tem mx-auto mb-5 mb-lg-3">
-                <div class="feature-icons-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
-                    <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
-                    </svg>
-                </div>
-                <h5>table list information</h5>
-                <p >show all about computer <br>,printer,hardware amd employees</p>
+                        <tr>
+                            <th>นามสกุล (ภาษาไทย)</th>
+                            <td><?php echo $users['lname_thai']; ?></td>
+                        </tr>
 
-            </div>
-        </div>
-        </div>
-</div>
-</section>
+                        <tr>
+                            <th>ชื่อ (ภาษาอังกฤษ)</th>
+                            <td><?php echo $users['fname_eng']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>นามสกุล (ภาษาอังกฤษ)</th>
+                            <td><?php echo $users['lname_eng']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>ชื่อเล่น</th>
+                            <td><?php echo $users['nickname']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>ชั้น</th>
+                            <td><?php echo $users['floor_']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>เบอร์ติดต่อ</th>
+                            <td><?php echo $users['phone']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>เบอร์ติดต่อภายใน</th>
+                            <td><?php echo $users['extn']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>อีเมลล์ผู้ใช้งาน</th>
+                            <td><?php echo $users['usermail']; ?></td>
+                        </tr>
 
-<!-- features icons end -->
+                        <tr>
+                            <th>ส่วนการทำงาน</th>
+                            <td><?php echo $users['workgroup_name']; ?></td>
+                        </tr>
+                        
+                        <tr>
+                            <th>สายการทำงาน</th>
+                            <td><?php echo $users['workline_name']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>แผนก</th>
+                            <td><?php echo $users['department_thai']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>แผนก (ภาษาอังกฤษ)</th>
+                            <td><?php echo $users['department_eng']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>สถานะพนักงาน </th>
+                            <td><?php echo $users['status_user']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>station</th>
+                            <td><?php echo $users['station']; ?></td>
+                        </tr>
 
-<!-- image shoecase section started -->
-
-    <section class="showcase" >
-        <div class="container-fluid p-0">
+                    </table>
+                    <?php }} ?>   
            
-            <div class="row g-0">
-                <div class="col-lg-6 text-white order-lg-2 showcase-img" style="background-image:url('../pic/comservice.jpg') " ></div>
-                <div class="col-lg-6  my-auto showcase-text">
-                    <h2>what is spam ?</h2>
-                    <p class="lead mb-0"> this is webpage for test webtext web maintain it-support mini project that preform summer internship </p>
-                </div>
-            </div>
-
-            <div class="row g-0">
-                <div class="col-lg-6  text-white showcase-img" style="background: url('../pic/comservice.jpg');"></div>
-                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                    <h2>Easy to check</h2>
-                    <p class="lead mb-0"> this is webpage for test webtext web maintain it-support mini project that preform summer internship </p>
-                </div>
-            </div>
-
-            <div class="row g-0">
-                <div class="col-lg-6 text-white order-lg-2 showcase-img" style="background: url('../pic/comservice.jpg');"></div>
-                <div class="col-lg-6  my-auto showcase-text">
-                    <h2>what is computer security</h2>
-                    <p class="lead mb-0"> this is webpage for test webtext web maintain it-support mini project that preform summer internship </p>
-                </div>
-            </div>
+        </div>
         
         </div>
-</section>
-<!-- image shoecase section end -->
-
-<!-- section admin-team starrted -->
-
-<section class="testimonials text-center bg-light">
-    <div class="container">
-        <h2 class="mb-5 mt-5">admin it-support</h2>
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="testimonials-item mx-auto mb-5 mb-lg-0">
-                    <img src="../pic/Basic_Ui__28186_29.jpg" class="img-fluid rounded-circle mb-3" alt="" >
-                    <h5> admin</5>
-                    <p class="font-weight-light mb-0">i'll support your working .</p>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="testimonials-item mx-auto mb-5 mb-lg-0">
-                    <img src="../pic/Basic_Ui__28186_29.jpg" class="img-fluid rounded-circle mb-3" alt="" >
-                    <h5> admin</5>
-                    <p class="font-weight-light mb-0">i'll support your working .</p>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="testimonials-item mx-auto mb-5 mb-lg-0">
-                    <img src="../pic/Basic_Ui__28186_29.jpg" class="img-fluid rounded-circle mb-3" alt="" >
-                    <h5> admin</5>
-                    <p class="font-weight-light mb-0">i'll support your working .</p>
-                </div>
-            </div>
-
-        </div>
     </div>
-     </section>
-
-<!-- section admin-team end -->
-
-
-<!-- footer section started -->
-
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5">
-                <h5><i class="fa fa-road"></i> IT-Support </h5>
-                <div class="row">
-                    <div class="col-6">
-                        <ul class="list-unstyled">
-                            <li><a href="">Contract</a></li>
-                            <li><a href="">About</a></li>
-                            <li><a href="">Security Policy</a></li>
-                            <li><a href="">Admin Team</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-unstyled">
-                            <li><a href="">Documentation</a></li>
-                            <li><a href="">Support</a></li>
-                            <li><a href="">Legal Terms</a></li>
-                            <li><a href="">Support Team</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <ul class="nav">
-                    <li class="nav-item"><a href="" class="nav-link pl-0"><i class="fa fa-facebook fa-lg"></i></a></li>
-                    <li class="nav-item"><a href="" class="nav-link"><i class="fa fa-twitter fa-lg"></i></a></li>
-                    <li class="nav-item"><a href="" class="nav-link"><i class="fa fa-github fa-lg"></i></a></li>
-                    <li class="nav-item"><a href="" class="nav-link"><i class="fa fa-instagram fa-lg"></i></a></li>
-                </ul>
-                <br>
-            </div>
-        </div>
-    </div>
-</footer>
+    </div>   
 
 
 
-
-
-<!-- footer section ended -->
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <?php include_once('script.php'); ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>    
 </body>
 </html>

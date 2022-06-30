@@ -193,7 +193,7 @@
                 $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
                 LEFT JOIN department ON employees.department=department.id
                 LEFT JOIN  workline ON employees.workline=workline.id
-                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id");
+                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id ");
                 
                 $stmt->execute(); 
               

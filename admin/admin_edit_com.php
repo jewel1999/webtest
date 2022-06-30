@@ -65,7 +65,7 @@
 <body>
 
   <div class="container mt-6"> 
-        <div class="modal-body">  <-- insert into data forms  -->   
+        <div class="modal-body"> 
             <form action="admin_edit_com.php" method="post" enctype="multiplepart/form-data">
                 <?php 
                     if(isset($_GET['id'])){

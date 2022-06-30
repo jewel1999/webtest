@@ -1,8 +1,15 @@
 <?php 
     session_start();
     require_once '../connect_db.php';
+    
+    $url = "admin_emp.php";
+    $components = parse_url($url, PHP_URL_QUERY);
+    //$component parameter is PHP_URL_QUERY
+    parse_str($components, $results);
+    print_r($results); 
+   
 
-                if(isset($_POST['emp_update'])){
+                if(isset($_POST['hrm_update'])){
                     $id =  $_POST['id'];
                     $employee_id = $_POST['employee_id'];
                     $fname_thai = $_POST['fname_thai'];
@@ -22,7 +29,7 @@
                     $status_user = $_POST['status_user'];
                     $station  = $_POST['station'];
 
-                if(!isset($_SESSION[''])){
+                if(!isset($_SESSION['error'])){
                     $update_emp= $conn->prepare("UPDATE employees SET employee_id=:employee_id,
                     fname_thai=:fname_thai,
                     lname_thai=:lname_thai,
@@ -91,18 +98,29 @@
 </head>
 <body>
 
+<? 
+echo $_GET['id'] ?>
+
   <div class="container mt-6"> 
         <div class="modal-body">  <!-- insert into data forms  -->   
             <form action="admin_edit_emp.php" method="post" enctype="multiplepart/form-data">
-                <?php 
-                    if(isset($_GET['id'])){
-                        $id = $_GET['id'];
-                        $stmt = $conn->query("SELECT * FROM employees WHERE id = $id");
-                        $stmt->execute();
-                        $data = $stmt->fetch();
-                    }
+            <?php 
+                
+  
+                 if(isset($_GET['id'])){
+                    $id = $_GET['id'];
+                    $stmt = $conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
+                    LEFT JOIN department ON employees.department=department.id
+                    LEFT JOIN workline ON employees.workline=workline.id
+                    LEFT JOIN workgroup ON employees.workgroup=workgroup.id ORDER BY employees.id=$id ");
+                    $stmt->execute();
+                    $data = $stmt->fetch();
+
+                }
+
                 ?>
 
+            
             <div class="mb-3">
                 <label for="id" class="col-form-label"> #id</label>
                 <input  readonly type="text" value="<?= $data['id']?>" class="form-control" name="id">

@@ -65,10 +65,10 @@
                     print_r($update_emp);
 
                     $_SESSION['success'] ="Update sucessfully! " ;
-                    header("location:admin_emp.php");     
+                    header("location:user_page_emp_adm.php");     
                 }else {
                     $_SESSION['error']   ="Update unsucessfully! " ;
-                    header("location:admin_emp.php");
+                    header("location:user_page_emp_adm.phpp");
                 }
         }
 
@@ -93,7 +93,7 @@
 
   <div class="container mt-6"> 
         <div class="modal-body">  <!-- insert into data forms  -->   
-            <form action="admin_edit_emp.php" method="post" enctype="multiplepart/form-data">
+            <form action="user_edit_emp_adm.php" method="post" enctype="multiplepart/form-data">
                 <?php 
                     if(isset($_GET['id'])){
                         $id = $_GET['id'];

@@ -27,7 +27,7 @@
 <?php 
                     if(isset($_GET['id'])){
                         $id = $_GET['id'];
-                        $stmt = $conn->query("SELECT * FROM  WHERE id = $id");
+                        $stmt = $conn->query("SELECT * FROM computers WHERE id = $id");
                         $stmt->execute();
                         $data = $stmt->fetch();
                     }

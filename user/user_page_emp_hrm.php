@@ -76,7 +76,7 @@
                 <td>
                 
                 <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#UserModalShowstaff">More </button>
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#UserModalUpdateStaff">Update</a>   
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#UserModalUpdatestaff">Update</button>   
                 </td>    
                         
             </tr>
@@ -93,7 +93,7 @@
         <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Insert Department table</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Staff information</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>    
 
@@ -113,7 +113,7 @@
                 $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
                 LEFT JOIN department ON employees.department=department.id
                 LEFT JOIN  workline ON employees.workline=workline.id
-                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='id' "  );
+                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='12' "  );
                 
                 $stmt->execute(); 
               
@@ -203,96 +203,45 @@
         </div>
     </div>
     </div>   
+    </div>   
 
-    <!-- Modal edit HRM edit phone and extn -->                   
-    <div class="modal fade" id="UserModaldepartment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Update</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>    
-
-        <div class="modal-body"> 
-            <form action="user_edit_emp_hrm.php" method="post" enctype="multiplepart/form-data">
-            <div class="mb-3">
-                <label for=workline_id class="col-form-label">ชื่อจริง (ภาษาไทย)</label>
-                <input type="text" class="form-control" name=workline_id>
-            </div>
-
-            <div class="mb-3">
-                <label for=workline_id class="col-form-label">นามสกุล (ภาษาไทย)</label>
-                <input type="text" class="form-control" name=workline_id>
-            </div>
-
-            <div class="mb-3">
-                <label for=workline_id class="col-form-label">ชื่อจริง (ภาษาอังกฤษ)</label>
-                <input type="text" class="form-control" name=workline_id>
-            </div>
-            
-            <div class="mb-3">
-                <label for=workline_id class="col-form-label">นามสกุล(ภาษาอังกฤษ)</label>
-                <input type="text" class="form-control" name=workline_id>
-            </div>
-
-      
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" name="hrm_update" class="btn btn-success">Submit</button>
-        </div>
-            </form>
-           
-        </div>
-        
-        </div>
-    </div>
-    </div>
-
+    
     <!-- Modal HRM update  staff info table  -->
-        <div class="modal fade" id="UserModalUpdateStaff" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal staff info table  -->
+<div class="modal fade" id="UserModalUpdatestaff" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Update information</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>    
 
         <div class="modal-body"> 
 
-    <!-- start table -->
-        <?php 
-                    if(isset($_GET['id'])){
-                        $id = $_GET['id'];
-                        $stmt = $conn->query("SELECT * FROM  WHERE id = $id");
-                        $stmt->execute();
-                        $data = $stmt->fetch();
-                    }
-        ?>
+        <!-- start table -->
+       
 
-        <?php 
-                $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
-                LEFT JOIN department ON employees.department=department.id
-                LEFT JOIN  workline ON employees.workline=workline.id
-                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='12' "  );
+<?php 
+
+                if(isset($_GET['id'])){
+                    $id = $_GET['id'];
+                    $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
+                    LEFT JOIN department ON employees.department=department.id
+                    LEFT JOIN  workline ON employees.workline=workline.id
+                    LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='id' "  );
                 
                 $stmt->execute(); 
               
                 $users_table = $stmt->fetchALL();
-
-                if(isset($_GET['id'])){
-                    $id = $_GET['id'];
+               
                 }else{
                     foreach  ($users_table as $users ) {   // foreach = loop data in table
             ?>
                     
                     <div class="contianer">
-                        <table class="  border-primary ">
-                        
-                        <tr>
-                            <th>แผนก (ภาษาอังกฤษ)</th>
-                            <td><?php echo $users['department_eng']; ?></td>
-                        </tr>
-                        <!-- Departmant line Dynamic dropdown-->
+                      
+                    <form action="user_edit_emp_hrm.php" method="post" enctype="multiplepart/form-data">
+                    <!-- Departmant line Dynamic dropdown-->
 
                         <label>Workgroup</label>
                         <select id="provinces" name='workgroup' class="form-control" required>
@@ -316,20 +265,39 @@
                             <select id="districts" name='department' class="form-control" required></select>
                         </div>
 
-            <!-- Departmant line Dynamic dropdown ended -->
-                        <tr>
-                            <th>station</th>
-                            <td><?php echo $users['station']; ?></td>
-                        </tr>
+                        <!-- Departmant line Dynamic dropdown ended -->
 
-                    </table>
+
+                        <div class="mb-3">
+                            <label for="department_eng" class="col-form-label">แผนก(ภาษาอักฤษ)</label>
+                            <input type="text" class="form-control" name="department_eng">
+                        </div>
+                        <div class="mb-3">
+                            <label for="status_user" class="col-form-label">สถานะพนักงาน</label>
+                            <input type="text" class="form-control" name="status_user">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="station" class="col-form-label">station</label>
+                            <input type="text" class="form-control" name="station">
+                        </div>
+
+                        <div class="modal-footer">
+                        <a type="button" class="btn btn-secondary" href="admin_emp.php">Close</a>
+                        <button type="submit" name="hrm_update" class="btn btn-primary" href="user_edit_emp_hrm.php" >Update</button>
+                    </div>
+                    </form>
+
                     <?php }} ?>   
            
         </div>
         
         </div>
     </div>
-    </div> 
+    </div>   
+    </div>   
+
+
 
     <?php include_once('script.php'); ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>    
