@@ -2,14 +2,20 @@
     session_start();
     require_once '../connect_db.php';
     
-    $url = "admin_emp.php";
-    $components = parse_url($url, PHP_URL_QUERY);
-    //$component parameter is PHP_URL_QUERY
-    parse_str($components, $results);
-    print_r($results); 
-   
+    if(isset($_GET['delete'])){
+        $delete_id = $_GET['delete'];
+        $deletestmt = $conn->query("DELETE FROM employees WHERE id = $delete_id");
+        $deletestmt->execute();
 
-                if(isset($_POST['hrm_update'])){
+        if($deletestmt){
+            echo"<script> alert('data hasbeen deleted successfully ');  </script>";
+            $_SESSION['success']="data has been deleted sccessfully";
+            header("refresh:1; url=admin_printer.php");
+        }
+    }
+    
+
+                if(isset($_POST['emp_update'])){
                     $id =  $_POST['id'];
                     $employee_id = $_POST['employee_id'];
                     $fname_thai = $_POST['fname_thai'];
@@ -98,21 +104,26 @@
 </head>
 <body>
 
-<? 
-echo $_GET['id'] ?>
+
 
   <div class="container mt-6"> 
         <div class="modal-body">  <!-- insert into data forms  -->   
             <form action="admin_edit_emp.php" method="post" enctype="multiplepart/form-data">
             <?php 
                 
-  
+            
+            //    echo $_GET['id'] ;
+            
+            echo "<br>";
+            echo $users= $_GET['id'];
+
                  if(isset($_GET['id'])){
                     $id = $_GET['id'];
                     $stmt = $conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
-                    LEFT JOIN department ON employees.department=department.id
-                    LEFT JOIN workline ON employees.workline=workline.id
-                    LEFT JOIN workgroup ON employees.workgroup=workgroup.id ORDER BY employees.id=$id ");
+                    LEFT JOIN department ON employees.department=department.department_id
+                    LEFT JOIN workline ON employees.workline=workline.workline_id
+                    LEFT JOIN workgroup ON employees.workgroup=workgroup.workgroup_id WHERE employees.id
+                     ");
                     $stmt->execute();
                     $data = $stmt->fetch();
 
@@ -123,7 +134,7 @@ echo $_GET['id'] ?>
             
             <div class="mb-3">
                 <label for="id" class="col-form-label"> #id</label>
-                <input  readonly type="text" value="<?= $data['id']?>" class="form-control" name="id">
+                <input type="text" value="<?= $id ?>" class="form-control" name="id"  readonly >
             </div>
 
             <div class="mb-3">
@@ -182,17 +193,17 @@ echo $_GET['id'] ?>
             </div>
             <div class="mb-3">
                 <label for="workgroup" class="col-form-label">ส่วนการทำงาน (workgroup)</label>
-                <input type="text" value="<?= $data['workgroup']?>" class="form-control" name="workgroup">
+                <input type="text" value="<?= $data['workgroup_name']?>" class="form-control" name="workgroup">
             </div>
            
             <div class="mb-3">
                 <label for="workline" class="col-form-label">สายการทำงาน (workline)</label>
-                <input type="text" value="<?= $data['workline']?>" class="form-control" name="workline">
+                <input type="text" value="<?= $data['workline_name']?>" class="form-control" name="workline">
             </div>
             
             <div class="mb-3">
                 <label for="department" class="col-form-label">แผนก</label>
-                <input type="text"  value="<?= $data['department']?>" class="form-control" name="department">
+                <input type="text"  value="<?= $data['department_thai']?>" class="form-control" name="department">
             </div>
 
             <div class="mb-3">

@@ -54,7 +54,10 @@
         </thead>
         <tbody>
             <?php 
-                $stmt =$conn->query("SELECT * FROM employees");
+                $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
+                LEFT JOIN department ON employees.department=department.id
+                LEFT JOIN  workline ON employees.workline=workline.id
+                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id ");
                 $stmt->execute(); 
                 $users_table = $stmt->fetchALL();
 
@@ -74,9 +77,11 @@
                 <td><?php echo $users['phone']; ?>  </td>     
                 <td><?php echo $users['extn']; ?>  </td>          
                 <td>
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#UserModalShowstaff">More </button>
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#UserModalShowstaff">Update</button>
+                
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#UserModalShowstaff">More </button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UserModalUpdatestaff">Update</button>   
                 </td>    
+                        
             </tr>
         <?php }} ?>   
         </tbody>
@@ -86,12 +91,12 @@
 </div>
 </div>
             
- <!-- Modal staff info table  -->
+<!-- Modal staff info table  -->
 <div class="modal fade" id="UserModalShowstaff" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Insert Department table</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Staff information</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>    
 
@@ -201,69 +206,103 @@
         </div>
     </div>
     </div>   
+    </div>   
 
-<!-- Modal staff info table  -->
-<div class="modal fade" id="UserModalShowstaff888" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    
+    <!-- Modal HRM update  staff info table  -->
+    <!-- Modal staff info table  -->
+<div class="modal fade" id="UserModalUpdatestaff" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Insert Department table</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Update information</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>    
 
         <div class="modal-body"> 
 
         <!-- start table -->
-        <?php 
-                    if(isset($_GET['id'])){
-                        $id = $_GET['id'];
-                        $stmt = $conn->query("SELECT * FROM  WHERE id = $id");
-                        $stmt->execute();
-                        $data = $stmt->fetch();
-                    }
-                ?>
+       
 
 <?php 
-                $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
-                LEFT JOIN department ON employees.department=department.id
-                LEFT JOIN  workline ON employees.workline=workline.id
-                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='12' "  );
+
+                if(isset($_GET['id'])){
+                    $id = $_GET['id'];
+                    $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
+                    LEFT JOIN department ON employees.department=department.id
+                    LEFT JOIN  workline ON employees.workline=workline.id
+                    LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='id' "  );
                 
                 $stmt->execute(); 
               
                 $users_table = $stmt->fetchALL();
-
-                if(isset($_GET['id'])){
-                    $id = $_GET['id'];
+               
                 }else{
                     foreach  ($users_table as $users ) {   // foreach = loop data in table
             ?>
                     
                     <div class="contianer">
-                        <table class="  border-primary ">
-                        
-                        <tr>
-                            <th>แผนก (ภาษาอังกฤษ)</th>
-                            <td><?php echo $users['department_eng']; ?></td>
-                        </tr>
-                        <tr>
-                            <th>สถานะพนักงาน </th>
-                            <td><?php echo $users['status_user']; ?></td>
-                        </tr>
-                        <tr>
-                            <th>station</th>
-                            <td><?php echo $users['station']; ?></td>
-                        </tr>
+                      
+                    <form action="user_edit_emp_hrm.php" method="post" enctype="multiplepart/form-data">
+                    <!-- Departmant line Dynamic dropdown-->
 
-                    </table>
-                    <?php }} ?>      
-   
+                        <label>Workgroup</label>
+                        <select id="provinces" name='workgroup' class="form-control" required>
+                        <option selected="selected" value=''>--เลือก--</option>
+                        <?php
+                        $province = "SELECT * from workgroup order by id ASC";
+                        $stmt = $conn->prepare($province);
+                        $stmt->execute();
+                        foreach ($stmt as $value) {
+                        ?>
+                        <option value="<?= $value['id'] ?>"><?= $value['workgroup_name'] ?></option>
+                        <?php } ?>
+                        </select>
+
+                        <div class="mb-3">
+                            <label for="workline" class="col-form-label">workline</label>
+                            <select id="amphures" name='workline' class="form-control" required> </select>
+
+                        </div> <div class="mb-3">
+                            <label for="department" class="col-form-label">department</label>
+                            <select id="districts" name='department' class="form-control" required></select>
+                        </div>
+
+                        <!-- Departmant line Dynamic dropdown ended -->
+
+
+                        <div class="mb-3">
+                            <label for="department_eng" class="col-form-label">แผนก(ภาษาอักฤษ)</label>
+                            <input type="text" class="form-control" name="department_eng">
+                        </div>
+                        <div class="mb-3">
+                            <label for="status_user" class="col-form-label">สถานะพนักงาน</label>
+                            <input type="text" class="form-control" name="status_user">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="station" class="col-form-label">station</label>
+                            <input type="text" class="form-control" name="station">
+                        </div>
+
+                        <div class="modal-footer">
+                        <a type="button" class="btn btn-secondary" href="admin_emp.php">Close</a>
+                        <button type="submit" name="hrm_update" class="btn btn-primary" href="user_edit_emp_hrm.php" >Update</button>
+                    </div>
+                    </form>
+
+                    <?php }} ?>   
+           
         </div>
         
         </div>
     </div>
-    </div>  
+    </div>   
+    </div>   
 
+
+
+    <?php include_once('script.php'); ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>    
 </body>
 </html>

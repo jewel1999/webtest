@@ -2,7 +2,7 @@
     session_start();
     require_once '../connect_db.php';
 
-                if(isset($_POST['emp_update'])){
+                if(isset($_POST['hrm_update'])){
                     $id =  $_POST['id'];
                     $employee_id = $_POST['employee_id'];
                     $fname_thai = $_POST['fname_thai'];

@@ -39,7 +39,7 @@
 
     <style>
         .container{
-            max-width:1000px;
+            max-width:700px;
         }
     </style>
 

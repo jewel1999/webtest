@@ -54,10 +54,27 @@
         </thead>
         <tbody>
             <?php 
-                $stmt =$conn->query("SELECT * FROM employees");
+                $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
+                LEFT JOIN department ON employees.department=department.id
+                LEFT JOIN  workline ON employees.workline=workline.id
+                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id ");
                 $stmt->execute(); 
                 $users_table = $stmt->fetchALL();
 
+        /* --started-- */
+                function filterQuery(Request $request){
+                    $id = $request
+
+                    $request = smtm::query();
+                    if(!empty($request->id)){
+                        $query->id('id');
+
+                    }
+                    &query = $query->get();
+                    return query_array_id()->of($id)->query(true);
+                }
+        /* --started-- */
+                $user_id = $id['id'];
                 if(!$users_table){
                     echo"<tr><td colpan='6' class='text-center'> No data found </td> </tr>";
                 }else{
@@ -70,7 +87,7 @@
                 <td><a href="admin_show_emp.php "><?php echo $users['fname_thai'];?></a>&nbsp;<?php echo $users['lname_thai'] ;  ?></td>
                 
                 <td><?php echo $users['nickname']; ?>  </td>
-                <td><?php echo $users['department']; ?> </td>
+                <td><?php echo $users['department_name']; ?> </td>
                 <td><?php echo $users['phone']; ?>  </td>     
                 <td><?php echo $users['extn']; ?>  </td>          
                 <td>

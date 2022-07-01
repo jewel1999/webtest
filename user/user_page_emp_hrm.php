@@ -54,34 +54,43 @@
         </thead>
         <tbody>
             <?php 
-                $stmt =$conn->query("SELECT * FROM employees");
-                $stmt->execute(); 
-                $users_table = $stmt->fetchALL();
+                $smtm = 
 
-                if(!$users_table){
-                    echo"<tr><td colpan='6' class='text-center'> No data found </td> </tr>";
-                }else{
-                    foreach  ($users_table as $users) {   // foreach = loop data in table
+
+
+
+                // $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
+                // LEFT JOIN department ON employees.department=department.id
+                // LEFT JOIN  workline ON employees.workline=workline.id
+                // LEFT JOIN  workgroup ON employees.workgroup=workgroup.id ");
+                // $stmt->execute(); 
+                // $users_table = $stmt->fetchALL();
+
+                // if(!$users_table){
+                //     echo"<tr><td colpan='6' class='text-center'> No data found </td> </tr>";
+                // }else{
+                //     foreach  ($users_table as $users) {   // foreach = loop data in table
             ?>
-            <tr>
+            <tr >
                 <th scope="row"><?php echo $users['id']; ?> </th>
                 <td><?php echo $users['employee_id']; ?>    </td>
                 
                 <td><a href="admin_show_emp.php "><?php echo $users['fname_thai'];?></a>&nbsp;<?php echo $users['lname_thai'] ;  ?></td>
                 
                 <td><?php echo $users['nickname']; ?>  </td>
-                <td><?php echo $users['department']; ?> </td>
+                <td><?php echo $users['department_thai']; ?> </td>
                 <td><?php echo $users['phone']; ?>  </td>     
                 <td><?php echo $users['extn']; ?>  </td>          
                 <td>
                 
-                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#UserModalShowstaff">More </button>
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#UserModalUpdatestaff">Update</button>   
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#UserModalShowstaff">More </button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UserModalUpdatestaff">Update</button>   
                 </td>    
                         
             </tr>
-        <?php }} ?>   
-        </tbody>
+        <?php  //}} ?>   
+        
+            </tbody>
     </table>
     </div> 
 </div>
@@ -101,27 +110,16 @@
 
         <!-- start table -->
         <?php 
-                    if(isset($_GET['id'])){
-                        $id = $_GET['id'];
-                        $stmt = $conn->query("SELECT * FROM  WHERE id = $id");
-                        $stmt->execute();
-                        $data = $stmt->fetch();
-                    }
-                ?>
-
-<?php 
+               
                 $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
                 LEFT JOIN department ON employees.department=department.id
                 LEFT JOIN  workline ON employees.workline=workline.id
-                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='12' "  );
+                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='$users[id]' "  );
                 
                 $stmt->execute(); 
               
                 $users_table = $stmt->fetchALL();
-
-                if(isset($_GET['id'])){
-                    $id = $_GET['id'];
-                }else{
+            
                     foreach  ($users_table as $users ) {   // foreach = loop data in table
             ?>
                     
@@ -228,7 +226,7 @@
                     $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
                     LEFT JOIN department ON employees.department=department.id
                     LEFT JOIN  workline ON employees.workline=workline.id
-                    LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='id' "  );
+                    LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='$id' "  );
                 
                 $stmt->execute(); 
               
@@ -283,12 +281,16 @@
                         </div>
 
                         <div class="modal-footer">
-                        <a type="button" class="btn btn-secondary" href="admin_emp.php">Close</a>
-                        <button type="submit" name="hrm_update" class="btn btn-primary" href="user_edit_emp_hrm.php" >Update</button>
+                        <a type="button" class="btn btn-secondary" href="user_page_emp_hrm.php">Close</a>
+                        <button type="submit" name="hrm_update" class="btn btn-success" href="user_edit_emp_hrm.php" >Update</button>
                     </div>
                     </form>
 
-                    <?php }} ?>   
+                    <?php 
+                    }
+                
+                }
+                 ?>   
            
         </div>
         
