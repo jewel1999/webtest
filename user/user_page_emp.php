@@ -66,14 +66,14 @@
                 }else{
                     foreach  ($users_table as $users) {   // foreach = loop data in table
             ?>
-            <tr>
+            <tr >
                 <th scope="row"><?php echo $users['id']; ?> </th>
                 <td><?php echo $users['employee_id']; ?>    </td>
                 
-                <td><a href="admin_show_emp.php "><?php echo $users['fname_thai'];?></a>&nbsp;<?php echo $users['lname_thai'] ;  ?></td>
+                <td><a href="admin_show_emp.php "><?php echo $users['fname_thai'];?></a><?php echo $users['lname_thai'] ;  ?></td>
                 
                 <td><?php echo $users['nickname']; ?>  </td>
-                <td><?php echo $users['department']; ?> </td>
+                <td><?php echo $users['department_thai']; ?> </td>
                 <td><?php echo $users['phone']; ?>  </td>     
                 <td><?php echo $users['extn']; ?>  </td>          
                 <td>
@@ -226,19 +226,19 @@
 
 <?php 
 
-                // if(isset($_GET['id'])){
-                //     $id = $_GET['id'];
-                //     $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
-                //     LEFT JOIN department ON employees.department=department.id
-                //     LEFT JOIN  workline ON employees.workline=workline.id
-                //     LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='id' "  );
+                 if(isset($_GET['id'])){
+                   $id = $_GET['id'];
+                     $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
+                     LEFT JOIN department ON employees.department=department.id
+                     LEFT JOIN  workline ON employees.workline=workline.id
+                     LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='id' "  );
                 
-                // $stmt->execute(); 
+                 $stmt->execute(); 
               
-                // $users_table = $stmt->fetchALL();
+                 $users_table = $stmt->fetchALL();
                
-                // }else{
-                //     foreach  ($users_table as $users ) {   // foreach = loop data in table
+                 }else{
+                     foreach  ($users_table as $users ) {   // foreach = loop data in table
             ?>
                     
                     <div class="contianer">
@@ -290,8 +290,8 @@
                         <button type="submit" name="hrm_update" class="btn btn-primary" href="user_edit_emp_hrm.php" >Update</button>
                     </div>
                     </form>
-<!-- 
-                    <?php //}} ?>    -->
+
+                    <?php }} ?>   
            
         </div>
         

@@ -1,8 +1,8 @@
 <?php 
     session_start();
     require_once "../connect_db.php";
-    
-    if(isset($_POST['admin_emp_insert'])){
+
+    if(isset($_POST['emp_insert'])){
         $staff_id = $_POST['staff_id'];
         $fname_thai = $_POST['fname_thai'];
         $lname_thai = $_POST['lname_thai'];
@@ -10,8 +10,8 @@
         $lname_eng  = $_POST['lname_eng'];
         $nickname =$_POST['nickname'];
         $sex =$_POST['sex'];
-        $floor_ =$_POST['floor_'];
         $extn =$_POST['extn'];
+        $floor_ =$_POST['floor_'];
         $usermail =$_POST['usermail'];
         $phonenumber =$_POST['phonenumber'];
         $workgroup_emp = $_POST['workgroup_emp'];
@@ -23,17 +23,22 @@
 
         if(!isset($_SESSION['error'])){
         try {
-            $check_staff_id = $conn->prepare("SELECT staff_id FROM staffinfo WHERE staff_id = :staff_id");   // : replace values
-            $check_staff_id->bindParam(":staff_id",$staff_id);
-            $check_staff_id->execute();
-            $row = $check_staff_id->fetch(PDO::FETCH_ASSOC);
+            // $check_staff_id = $conn->prepare("SELECT staff_id FROM staffinfo WHERE staff_id = :staff_id");   // : replace values
+            // $check_staff_id->bindParam(":staff_id",$staff_id);
+            // $check_staff_id->execute();
+            // $row = $check_staff_id->fetch(PDO::FETCH_ASSOC);
 
-                $stmt = $conn->prepare("INSERT INTO staffinfo(staff_id,fname_thai,lname_thai,fname_eng,lname_eng,nickname,sex,
-                floor_,extn,usermail,phonenumber,workgroup_emp,workline_emp,department_thai,department_eng,status_staff,station)
-                                        VALUES (:employee_id,:fname_thai,:lname_thai,:fname_eng,:lname_eng,:nickname,
-                :floor_,:extn,:usermail,:phonenumber,:sex,:workgroup_emp,:workline_emp,:department_thai,:department_eng,:status_staff,:station)");
+                $stmt = $conn->prepare("INSERT INTO staffinfo(staff_id,fname_thai,
+                                        lname_thai,fname_eng,lname_eng,nickname,sex,
+                                        floor_,extn,usermail,phonenumber,workgroup_emp,
+                                        workline_emp,department_thai,department_eng,status_staff,station)
+                                        
+                                        VALUES (:staff_id,:fname_thai,:lname_thai,
+                                        :fname_eng,:lname_eng,:nickname,:sex,
+                                        :floor_,:extn,:usermail,:phonenumber,:workgroup_emp,:workline_emp,
+                                        :department_thai,:department_eng,:status_staff,:station)");
 
-                $stmt->bindParam(":employee_id",$employee_id);
+                $stmt->bindParam(":staff_id",$staff_id);
                 $stmt->bindParam(":fname_thai",$fname_thai);
                 $stmt->bindParam(":lname_thai",$lname_thai);
                 $stmt->bindParam(":fname_eng",$fname_eng);

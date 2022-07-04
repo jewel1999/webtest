@@ -46,99 +46,105 @@
           
 
     <!--  --------------User data---------------------- -->
-    <table class="table ">
+    <table class="table">
         <thead>
             <tr>
             <th scope="col">#</th>
-            <th scope="col">รหัสพนักงาน</th>
-            <th scope="col">ชื่อ-สกุล (ภาษาไทย)</th>   
-            <th scope="col">ชื่อเล่น</th>
-            <th scope="col">แผนก</th>
-            <th scope="col">เบอร์โทรศัพท์</th>
-            <th scope="col">หมายเลขภายใน</th>
-            <th scope="col">#</th>
-
+            <th scope="col">Staff ID#</th>
+            <th scope="col">Staff Name</th>
+            <th scope="col">เบอร์ติดต่อภายใน</th>
+            <th scope="col">แผนก</th>         
+            <th scope="col">ชั้น</th>
+            <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
             <?php 
-                $stmt =$conn->query("SELECT * from staffinfo ");
+                
+                $stmt =$conn->query("SELECT staffinfo.*,department.*,workline.*,workgroup.* FROM staffinfo 
+                LEFT JOIN department ON staffinfo.department_thai=department.id
+                LEFT JOIN  workline ON staffinfo.workline_emp=workline.id
+                LEFT JOIN  workgroup ON staffinfo.workgroup_emp=workgroup.id  WHERE staffinfo.st_id "  );
                 $stmt->execute(); 
-                $users_table = $stmt->fetchALL();
+                $stafftable = $stmt->fetchALL();
 
-                if(!$users_table){
-                    echo"<tr><td colpan='6' class='text-center'> No data found </td> </tr>";
+                if(!$stafftable){
+                    echo"<tr> <td colpan='6' class='text-center'> No data found </td> </tr>";
                 }else{
-                    foreach  ($users_table as $users) {   // foreach = loop data in table
+                    foreach  ($stafftable as $staff) {   // foreach = loop data in table
             ?>
             <tr>
-                <th scope="row"><?php echo $users['id']; ?> </th>
-                <td><?php echo $users['staff_id']; ?>    </td>
+                <th scope="row"><?php echo $staff['st_id']; ?> </th>
+                <td><?php echo $staff['staff_id']; ?>  </td>
+                <td><?php echo $staff['fname_thai']; ?> &nbsp; <?php echo $staff['fname_thai']; ?>     </td>
+                <td><?php echo $staff['extn']; ?>  </td>
+                <td><?php echo $staff['department_thai']; ?> </td>
+                <td><?php echo $staff['floor_']; ?> </td>
                 
-                <td><!-- <a href="admin_show_emp.php "><?php echo $users['fname_thai'];?></a>&nbsp;<?php echo $users['lname_thai'] ;  ?></td> -->
-                
-                <td><?php echo $users['nickname']; ?>  </td>
-                <td><?php echo $users['department_thai']; ?> </td>
-                <td><?php echo $users['extn']; ?>  </td>  
-                <td><?php echo $users['floor_']; ?>  </td>     
-                        
-                <td>
-                
-                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#UserModalShowstaff">More </button>
-                <a href="admin_edit_emp.php?id=<?= $users['id']; ?>"  class="btn btn-warning">Edit</a>
+                <td> 
+                    
+                    <button value="id=<?= $staff['st_id']; ?>" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#UserModalShowstaff">More</button>
+                    <a href="admin_edit_com.php?id=<?= $staff['st_id']; ?>"  class="btn btn-warning">Edit</a>
+                    <a href="?delete=<?= $staff['id']; ?>"  class="btn btn-danger" onclick="return confirm('are you sure to delete ?')" >Delete</a>
                 </td>    
-                        
-            </tr>
-        <?php }} ?>   
-        </tbody>
-    </table>
-    </div> 
-</div>
-</div>
-</div>
+
+                </tr>
+            <?php }} ?>   
+            </tbody>
+            </table>
+            </div>
+
+
             
-<!-- Modal staff info table  -->
-<div class="modal fade" id="UserModalShowstaff" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Staff information</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>    
+            <!--+++++++++++++++++++++++++++ Modal staff info table  +++++++++++++++++++++++++++++-->
+
+
+            <div class="modal fade" id="UserModalShowstaff" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Staff information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>    
 
         <div class="modal-body"> 
 
         <!-- start table -->
+
         <?php 
                     if(isset($_GET['id'])){
                         $id = $_GET['id'];
-                        $stmt = $conn->query("SELECT * FROM  WHERE id = $id");
+                        $stmt = $conn->query("SELECT * FROM staffinfo  WHERE st_id = $id");
                         $stmt->execute();
                         $data = $stmt->fetch();
                     }
                 ?>
+       
 
 <?php 
-                $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
-                LEFT JOIN department ON employees.department=department.id
-                LEFT JOIN  workline ON employees.workline=workline.id
-                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='12' "  );
-                
-                $stmt->execute(); 
-              
-                $users_table = $stmt->fetchALL();
 
-                if(isset($_GET['id'])){
-                    $id = $_GET['id'];
-                }else{
+                $sttt =$conn->query("SELECT staffinfo.*,department.*,workline.*,workgroup.* FROM staffinfo 
+                LEFT JOIN department ON staffinfo.department_thai=department.id
+                LEFT JOIN  workline ON staffinfo.workline_emp=workline.id
+                LEFT JOIN  workgroup ON staffinfo.workgroup_emp=workgroup.id  WHERE staffinfo.st_id=$id "  );
+                $sttt->execute(); 
+                $stafftable = $sttt->fetchALL();
+                $sttt->execute(); 
+              
+                $users_table = $sttt->fetchALL();
                     foreach  ($users_table as $users ) {   // foreach = loop data in table
-            ?>
+?>
                     
                     <div class="contianer">
                         <table class="  border-primary ">
                         <tr>
+                            <th>id</th>
+                            <td><?php echo $users['st_id']; ?></td>
+
+                        </tr>
+                        <tr>
                             <th>staff id</th>
-                            <td><?php echo $users['employee_id']; ?></td>
+                            <td><?php echo $users['staff_id']; ?></td>
 
                         </tr>
                             <th>ชื่อจริง (ภาษาไทย) </th>
@@ -167,7 +173,7 @@
                         </tr>
                         <tr>
                             <th>เบอร์ติดต่อ</th>
-                            <td><?php echo $users['phone']; ?></td>
+                            <td><?php echo $users['phonenumber']; ?></td>
                         </tr>
                         <tr>
                             <th>เบอร์ติดต่อภายใน</th>
@@ -180,12 +186,12 @@
 
                         <tr>
                             <th>ส่วนการทำงาน</th>
-                            <td><?php echo $users['workgroup_name']; ?></td>
+                            <td><?php echo $users['workgroup_emp']; ?></td>
                         </tr>
                         
                         <tr>
                             <th>สายการทำงาน</th>
-                            <td><?php echo $users['workline_name']; ?></td>
+                            <td><?php echo $users['workline_emp']; ?></td>
                         </tr>
                         <tr>
                             <th>แผนก</th>
@@ -197,7 +203,7 @@
                         </tr>
                         <tr>
                             <th>สถานะพนักงาน </th>
-                            <td><?php echo $users['status_user']; ?></td>
+                            <td><?php echo $users['status_staff']; ?></td>
                         </tr>
                         <tr>
                             <th>station</th>
@@ -205,7 +211,7 @@
                         </tr>
 
                     </table>
-                    <?php }} ?>   
+                    <?php } ?>   
            
         </div>
         
@@ -232,7 +238,7 @@
 
                     <div class="contianer">
                       
-                    <form action="admin_emp_insert.php" method="post" enctype="multiplepart/form-data">
+                    <form action="admin_insert_emp.php" method="post" enctype="multiplepart/form-data">
                   
                     <div class="mb-3">
                             <label for="staff_id" class="col-form-label">Staff ID</label>
@@ -261,7 +267,7 @@
 
                     <div class="mb-3">
                     <label for="sex" class="col-form-label">เพศ</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select name="sex" class="form-select" aria-label="Default select example">
                         <option selected> --- select ---</option>
                         <option value="male">male</option>  
                         <option value="female">female</option>  
@@ -281,7 +287,7 @@
                         <!-- Departmant line Dynamic dropdown-->
 
                         <label>Workgroup</label>
-                        <select id="provinces" name="workgroup" class="form-control" required>
+                        <select id="provinces" name="workgroup_emp" class="form-control" required>
                         <option selected="selected" value=''>--เลือก Workgroup--</option>
                         <?php
                         $province = "SELECT * from workgroup order by id ASC";
@@ -294,8 +300,8 @@
                         </select>
 
                         <div class="mb-3">
-                            <label for="workline" class="col-form-label">Workline</label>
-                            <select id="amphures" name="workline"class="form-control" required> </select>
+                            <label for="workline_emp" class="col-form-label">Workline</label>
+                            <select id="amphures" name="workline_emp"class="form-control" required> </select>
 
                         </div> <div class="mb-3">
                             <label for="department_thai" class="col-form-label">Department</label>
@@ -330,7 +336,7 @@
 
                     <div class="mb-3">
                     <label for="status_staff" class="col-form-label">สถานะพนักงาน</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select  name="status_staff"  class="form-select" aria-label="Default select example">
                         <option selected> --- select ---</option>
                         <option value="Active">Active</option>  
                         <option value="Empty">Empty</option>  
@@ -339,7 +345,7 @@
 
                     <div class="mb-3">
                     <label for="station" class="col-form-label">Station</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select name="station" class="form-select" aria-label="Default select example">
                         <option selected> --- select ---</option>
                         <option value="headstation">Head station</option>  
                         <option value="branch">Branch</option>  
@@ -347,9 +353,10 @@
                     </div>
                     <hr>
 
-                        <div class="modal-footer">
-                        <button type="submit" name="admin_emp_insert" class="btn btn-success">Submit</button>
-                    </div>
+                    <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" name="emp_insert" class="btn btn-success">submit</button>
+        </div>
                     </form>
 
                     <?php ?>    
