@@ -32,10 +32,8 @@ if (isset($_POST['function']) && $_POST['function'] == 'amphures') {
 if (isset($_POST['function']) && $_POST['function'] == 'districts') {
   $id = $_POST['id'];
   $sql = "SELECT * FROM department WHERE department_id='$id'";
-  $query3 = $conn->prepare($sql);
-  $query3->execute();
-  $result = $query3->fetch(PDO::FETCH_ASSOC);
-
+  $query3 = mysqli_query($con, $sql);
+  $result = mysqli_fetch_assoc($query3);
   echo $result['department_eng'];
   exit();
 }

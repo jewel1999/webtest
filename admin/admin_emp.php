@@ -62,10 +62,7 @@
         </thead>
         <tbody>
             <?php 
-                $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
-                LEFT JOIN department ON employees.department=department.id
-                LEFT JOIN  workline ON employees.workline=workline.id
-                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id ");
+                $stmt =$conn->query("SELECT * from staffinfo ");
                 $stmt->execute(); 
                 $users_table = $stmt->fetchALL();
 
@@ -76,18 +73,19 @@
             ?>
             <tr>
                 <th scope="row"><?php echo $users['id']; ?> </th>
-                <td><?php echo $users['employee_id']; ?>    </td>
+                <td><?php echo $users['staff_id']; ?>    </td>
                 
-                <td><a href="admin_show_emp.php "><?php echo $users['fname_thai'];?></a>&nbsp;<?php echo $users['lname_thai'] ;  ?></td>
+                <td><!-- <a href="admin_show_emp.php "><?php echo $users['fname_thai'];?></a>&nbsp;<?php echo $users['lname_thai'] ;  ?></td> -->
                 
                 <td><?php echo $users['nickname']; ?>  </td>
-                <td><?php echo $users['department']; ?> </td>
-                <td><?php echo $users['phone']; ?>  </td>     
-                <td><?php echo $users['extn']; ?>  </td>          
+                <td><?php echo $users['department_thai']; ?> </td>
+                <td><?php echo $users['extn']; ?>  </td>  
+                <td><?php echo $users['floor_']; ?>  </td>     
+                        
                 <td>
                 
                 <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#UserModalShowstaff">More </button>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UserModalUpdatestaff">Update</button>   
+                <a href="admin_edit_emp.php?id=<?= $users['id']; ?>"  class="btn btn-warning">Edit</a>
                 </td>    
                         
             </tr>
@@ -217,70 +215,6 @@
     </div>   
 
     
-    <!-- Modal HRM update  staff info table  -->
-    <!-- Modal staff info table  -->
-<div class="modal fade" id="UserModalUpdatestaff" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Update information</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>    
-
-        <div class="modal-body"> 
-
-        <!-- start table -->
-       
-
-<?php 
-
-                // if(isset($_GET['id'])){
-                //     $id = $_GET['id'];
-                //     $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
-                //     LEFT JOIN department ON employees.department=department.id
-                //     LEFT JOIN  workline ON employees.workline=workline.id
-                //     LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='id' "  );
-                
-                // $stmt->execute(); 
-              
-                // $users_table = $stmt->fetchALL();
-               
-                // }else{
-                //     foreach  ($users_table as $users ) {   // foreach = loop data in table
-            ?>
-                    
-                    <div class="contianer">
-                      
-                    <form action="user_edit_emp_hrm.php" method="post" enctype="multiplepart/form-data">
-            
-                        <div class="mb-3">
-                            <label for="department_eng" class="col-form-label">แผนก(ภาษาอักฤษ)</label>
-                            <input type="text" class="form-control" name="department_eng">
-                        </div>
-                        <div class="mb-3">
-                            <label for="status_user" class="col-form-label">สถานะพนักงาน</label>
-                            <input type="text" class="form-control" name="status_user">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="station" class="col-form-label">station</label>
-                            <input type="text" class="form-control" name="station">
-                        </div>
-
-                        <div class="modal-footer">
-                        <a type="button" class="btn btn-secondary" href="admin_emp.php">Close</a>
-                        <button type="submit" name="hrm_update" class="btn btn-primary" href="user_edit_emp_hrm.php" >Update</button>
-                    </div>
-                    </form>
-<!-- 
-                    <?php //}} ?>    -->
-           
-        </div>
-        
-        </div>
-    </div>
-    </div>   
-    </div>   
 
 
     <!-- insert staff info-->
@@ -360,24 +294,33 @@
                         </select>
 
                         <div class="mb-3">
-                            <label for="workline" class="col-form-label">workline</label>
+                            <label for="workline" class="col-form-label">Workline</label>
                             <select id="amphures" name="workline"class="form-control" required> </select>
 
                         </div> <div class="mb-3">
-                            <label for="department" class="col-form-label">department</label>
-                            <select id="districts" name="department" class="form-control" required></select>
+                            <label for="department_thai" class="col-form-label">Department</label>
+                            <select id="districts" name="department_thai" class="form-control" required></select>
                         </div>
+                        
 
+                        </div> <div class="mb-3">
+                        <label>Deprtment english</label>
+                        <select id="department_eng" name="department_eng" class="form-control" required>
+                        <option selected="selected" value=''>--เลือก--</option>
+                        <?php
+                        $province = "SELECT * from department order by id ASC";
+                        $stmt = $conn->prepare($province);
+                        $stmt->execute();
+                        foreach ($stmt as $value) {
+                        ?>
+                        <option value="<?= $value['id'] ?>"><?= $value['department_eng'] ?></option>
+                        <?php } ?>
+                        </select>
+                        </div>
                         <!-- Departmant line Dynamic dropdown ended -->
 
-
-                        <div class="mb-3">
-                            <label for="department_eng" class="col-form-label">แผนก(ภาษาอักฤษ)</label>
-                            <input type="text" class="form-control" name="department_eng">
-                        </div>
- 
                     <div class="mb-3">
-                            <label for="usermail" class="col-form-label">usermail</label>
+                            <label for="usermail" class="col-form-label">Usermail</label>
                             <input type="text" class="form-control" name="usermail">
                     </div>
                     <div class="mb-3">
@@ -386,7 +329,7 @@
                     </div>
 
                     <div class="mb-3">
-                    <label for="status_user" class="col-form-label">สถานะพนักงาน</label>
+                    <label for="status_staff" class="col-form-label">สถานะพนักงาน</label>
                     <select class="form-select" aria-label="Default select example">
                         <option selected> --- select ---</option>
                         <option value="Active">Active</option>  
@@ -405,7 +348,7 @@
                     <hr>
 
                         <div class="modal-footer">
-                        <button type="submit" name="admin_insert_emp" class="btn btn-success" href="admin_insert_emp.php" >Insert</button>
+                        <button type="submit" name="admin_emp_insert" class="btn btn-success">Submit</button>
                     </div>
                     </form>
 

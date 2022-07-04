@@ -25,6 +25,7 @@
       data: {id:id_amphures,function:'amphures'},
       success: function(data){
           $('#districts').html(data);  
+       
       }
     });
   });
@@ -42,61 +43,6 @@
     });
   
   });
-
-
-  $('#provinces2').change(function() {
-    var id_province = $(this).val();
-
-      $.ajax({
-      type: "POST",
-      url: "ajax_db.php",
-      data: {id:id_province,function:'provinces'},
-      success: function(data){
-          $('#amphures').html(data); 
-          $('#districts').html(' '); 
-          $('#districts').val(' ');  
-          $('#zip_code').val(' '); 
-      }
-    });
-  });
-
-  $('#amphures2').change(function() {
-    var id_amphures = $(this).val();
-
-      $.ajax({
-      type: "POST",
-      url: "ajax_db.php",
-      data: {id:id_amphures,function:'amphures'},
-      success: function(data){
-          $('#districts').html(data);  
-      }
-    });
-  });
-
-  $('#districts2').change(function() {
-    var id_districts= $(this).val();
-
-      $.ajax({
-      type: "POST",
-      url: "ajax_db.php",
-      data: {id:id_districts,function:'districts'},
-      success: function(data){
-          $('#zip_code').val(data)
-      }
-    });
-  
-  });
-
-
-
-
-
-</script>
-
-
-
-
-
 
 
 </script>
