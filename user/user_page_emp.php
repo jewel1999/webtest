@@ -226,19 +226,19 @@
 
 <?php 
 
-                if(isset($_GET['id'])){
-                    $id = $_GET['id'];
-                    $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
-                    LEFT JOIN department ON employees.department=department.id
-                    LEFT JOIN  workline ON employees.workline=workline.id
-                    LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='id' "  );
+                // if(isset($_GET['id'])){
+                //     $id = $_GET['id'];
+                //     $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
+                //     LEFT JOIN department ON employees.department=department.id
+                //     LEFT JOIN  workline ON employees.workline=workline.id
+                //     LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='id' "  );
                 
-                $stmt->execute(); 
+                // $stmt->execute(); 
               
-                $users_table = $stmt->fetchALL();
+                // $users_table = $stmt->fetchALL();
                
-                }else{
-                    foreach  ($users_table as $users ) {   // foreach = loop data in table
+                // }else{
+                //     foreach  ($users_table as $users ) {   // foreach = loop data in table
             ?>
                     
                     <div class="contianer">
@@ -247,8 +247,8 @@
                     <!-- Departmant line Dynamic dropdown-->
 
                         <label>Workgroup</label>
-                        <select id="provinces" name='workgroup' class="form-control" required>
-                        <option selected="selected" value=''>--เลือก--</option>
+                        <select id="provinces" name="workgroup" class="form-control" required>
+                        <option selected="selected" value=''>--เลือก Workgroup--</option>
                         <?php
                         $province = "SELECT * from workgroup order by id ASC";
                         $stmt = $conn->prepare($province);
@@ -261,11 +261,11 @@
 
                         <div class="mb-3">
                             <label for="workline" class="col-form-label">workline</label>
-                            <select id="amphures" name='workline' class="form-control" required> </select>
+                            <select id="amphures" name="workline"class="form-control" required> </select>
 
                         </div> <div class="mb-3">
                             <label for="department" class="col-form-label">department</label>
-                            <select id="districts" name='department' class="form-control" required></select>
+                            <select id="districts" name="department" class="form-control" required></select>
                         </div>
 
                         <!-- Departmant line Dynamic dropdown ended -->
@@ -290,8 +290,8 @@
                         <button type="submit" name="hrm_update" class="btn btn-primary" href="user_edit_emp_hrm.php" >Update</button>
                     </div>
                     </form>
-
-                    <?php }} ?>   
+<!-- 
+                    <?php //}} ?>    -->
            
         </div>
         

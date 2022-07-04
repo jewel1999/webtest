@@ -54,10 +54,18 @@
         </thead>
         <tbody>
             <?php 
-                $smtm = 
+               $smtm= mysqil_query($conn,"SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
+               LEFT JOIN department ON employees.department=department.id
+               LEFT JOIN  workline ON employees.workline=workline.id
+               LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='id' ")
 
-
-
+                while($row = mysqil_fetch_array($result)){
+                    ?>
+                }
+                <tr id="<? echo $row['id']?>">
+                <td> 
+                        <td> <? echo $i; ?> </td>
+                         
 
                 // $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
                 // LEFT JOIN department ON employees.department=department.id

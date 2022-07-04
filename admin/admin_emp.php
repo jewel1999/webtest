@@ -22,9 +22,17 @@
                 <a href="user_home.php" type="button" class="btn btn-dark" >back</a >
             </div>
             <br>
-        <div class="row">
-            <div class="col-md-12">
-                    <h1> Staff information </h1>
+            <div class="row">
+            <div class="col-md-6">
+                    <h1> Staff  information </h1>
+            </div>
+            <div class="col-md-6  d-flex justify-content-end">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#StaffInsertModal">Insert staff</button>
+            </div>
+
+            </div>
+            
+
                     <p class="text-secondary" >all user</p>
 
                   <br>
@@ -54,7 +62,10 @@
         </thead>
         <tbody>
             <?php 
-                $stmt =$conn->query("SELECT * FROM employees");
+                $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
+                LEFT JOIN department ON employees.department=department.id
+                LEFT JOIN  workline ON employees.workline=workline.id
+                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id ");
                 $stmt->execute(); 
                 $users_table = $stmt->fetchALL();
 
@@ -223,51 +234,25 @@
 
 <?php 
 
-                if(isset($_GET['id'])){
-                    $id = $_GET['id'];
-                    $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
-                    LEFT JOIN department ON employees.department=department.id
-                    LEFT JOIN  workline ON employees.workline=workline.id
-                    LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='id' "  );
+                // if(isset($_GET['id'])){
+                //     $id = $_GET['id'];
+                //     $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
+                //     LEFT JOIN department ON employees.department=department.id
+                //     LEFT JOIN  workline ON employees.workline=workline.id
+                //     LEFT JOIN  workgroup ON employees.workgroup=workgroup.id  WHERE employees.id='id' "  );
                 
-                $stmt->execute(); 
+                // $stmt->execute(); 
               
-                $users_table = $stmt->fetchALL();
+                // $users_table = $stmt->fetchALL();
                
-                }else{
-                    foreach  ($users_table as $users ) {   // foreach = loop data in table
+                // }else{
+                //     foreach  ($users_table as $users ) {   // foreach = loop data in table
             ?>
                     
                     <div class="contianer">
                       
                     <form action="user_edit_emp_hrm.php" method="post" enctype="multiplepart/form-data">
-                    <!-- Departmant line Dynamic dropdown-->
-
-                        <label>Workgroup</label>
-                        <select id="provinces" name='workgroup' class="form-control" required>
-                        <option selected="selected" value=''>--เลือก--</option>
-                        <?php
-                        $province = "SELECT * from workgroup order by id ASC";
-                        $stmt = $conn->prepare($province);
-                        $stmt->execute();
-                        foreach ($stmt as $value) {
-                        ?>
-                        <option value="<?= $value['id'] ?>"><?= $value['workgroup_name'] ?></option>
-                        <?php } ?>
-                        </select>
-
-                        <div class="mb-3">
-                            <label for="workline" class="col-form-label">workline</label>
-                            <select id="amphures" name='workline' class="form-control" required> </select>
-
-                        </div> <div class="mb-3">
-                            <label for="department" class="col-form-label">department</label>
-                            <select id="districts" name='department' class="form-control" required></select>
-                        </div>
-
-                        <!-- Departmant line Dynamic dropdown ended -->
-
-
+            
                         <div class="mb-3">
                             <label for="department_eng" class="col-form-label">แผนก(ภาษาอักฤษ)</label>
                             <input type="text" class="form-control" name="department_eng">
@@ -287,8 +272,8 @@
                         <button type="submit" name="hrm_update" class="btn btn-primary" href="user_edit_emp_hrm.php" >Update</button>
                     </div>
                     </form>
-
-                    <?php }} ?>   
+<!-- 
+                    <?php //}} ?>    -->
            
         </div>
         
@@ -296,6 +281,142 @@
     </div>
     </div>   
     </div>   
+
+
+    <!-- insert staff info-->
+       
+
+    <div class="modal fade" id="StaffInsertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update information</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>    
+
+        <div class="modal-body"> 
+
+                    <div class="contianer">
+                      
+                    <form action="admin_emp_insert.php" method="post" enctype="multiplepart/form-data">
+                  
+                    <div class="mb-3">
+                            <label for="staff_id" class="col-form-label">Staff ID</label>
+                            <input type="text" class="form-control" name="staff_id">
+                    </div>
+                    <div class="mb-3">
+                            <label for="fname_thai" class="col-form-label">ชื่อจริง (ภาษาไทย)</label>
+                            <input type="text" class="form-control" name="fname_thai">
+                    </div>
+                    <div class="mb-3">
+                            <label for="lname_thai" class="col-form-label">นามสกุล (ภาษาไทย)</label>
+                            <input type="text" class="form-control" name="lname_thai">
+                    </div>
+                    <div class="mb-3">
+                            <label for="fname_eng" class="col-form-label">ชื่อจริง (ภาษาอังกฤษ)</label>
+                            <input type="text" class="form-control" name="fname_eng">
+                    </div>
+                    <div class="mb-3">
+                            <label for="lname_eng" class="col-form-label">นามสกุล (ภาษาอังกฤษ)</label>
+                            <input type="text" class="form-control" name="lname_eng">
+                    </div>
+                    <div class="mb-3">
+                            <label for="nickname" class="col-form-label">ชื่อเล่น</label>
+                            <input type="text" class="form-control" name="nickname">
+                    </div>
+
+                    <div class="mb-3">
+                    <label for="sex" class="col-form-label">เพศ</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected> --- select ---</option>
+                        <option value="male">male</option>  
+                        <option value="female">female</option>  
+                    </select>
+                    </div>
+
+                    <div class="mb-3">
+                            <label for="extn" class="col-form-label">เบอร์ติดต่อภายใน</label>
+                            <input type="text" class="form-control" name="extn">
+                    </div>
+                    <div class="mb-3">
+                            <label for="floor_" class="col-form-label">ชั้น</label>
+                            <input type="text" class="form-control" name="floor_">
+                    </div>
+
+
+                        <!-- Departmant line Dynamic dropdown-->
+
+                        <label>Workgroup</label>
+                        <select id="provinces" name="workgroup" class="form-control" required>
+                        <option selected="selected" value=''>--เลือก Workgroup--</option>
+                        <?php
+                        $province = "SELECT * from workgroup order by id ASC";
+                        $stmt = $conn->prepare($province);
+                        $stmt->execute();
+                        foreach ($stmt as $value) {
+                        ?>
+                        <option value="<?= $value['id'] ?>"><?= $value['workgroup_name'] ?></option>
+                        <?php } ?>
+                        </select>
+
+                        <div class="mb-3">
+                            <label for="workline" class="col-form-label">workline</label>
+                            <select id="amphures" name="workline"class="form-control" required> </select>
+
+                        </div> <div class="mb-3">
+                            <label for="department" class="col-form-label">department</label>
+                            <select id="districts" name="department" class="form-control" required></select>
+                        </div>
+
+                        <!-- Departmant line Dynamic dropdown ended -->
+
+
+                        <div class="mb-3">
+                            <label for="department_eng" class="col-form-label">แผนก(ภาษาอักฤษ)</label>
+                            <input type="text" class="form-control" name="department_eng">
+                        </div>
+ 
+                    <div class="mb-3">
+                            <label for="usermail" class="col-form-label">usermail</label>
+                            <input type="text" class="form-control" name="usermail">
+                    </div>
+                    <div class="mb-3">
+                            <label for="phonenumber" class="col-form-label">เบอร์โทรศัพท์</label>
+                            <input type="text" class="form-control" name="phonenumber">
+                    </div>
+
+                    <div class="mb-3">
+                    <label for="status_user" class="col-form-label">สถานะพนักงาน</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected> --- select ---</option>
+                        <option value="Active">Active</option>  
+                        <option value="Empty">Empty</option>  
+                    </select>
+                    </div>
+
+                    <div class="mb-3">
+                    <label for="station" class="col-form-label">Station</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected> --- select ---</option>
+                        <option value="headstation">Head station</option>  
+                        <option value="branch">Branch</option>  
+                    </select>
+                    </div>
+                    <hr>
+
+                        <div class="modal-footer">
+                        <button type="submit" name="admin_insert_emp" class="btn btn-success" href="admin_insert_emp.php" >Insert</button>
+                    </div>
+                    </form>
+
+                    <?php ?>    
+        </div>
+        </div>
+    </div>
+    </div>   
+    </div>   
+
+
 
 
 
