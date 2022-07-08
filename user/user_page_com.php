@@ -87,7 +87,7 @@
                 <td><?php echo $computers['create_at']; ?>  </td>       
                 <td> 
                     
-                     <a href="user_fin_update_com.php? id=<?= $computers['id']; ?>"  class="btn btn-secondary">More</a>
+                     <a href="user_show_com.php? id=<?= $computers['id']; ?>"  class="btn btn-secondary">More</a>
                     
                 </td>    
             </tr>

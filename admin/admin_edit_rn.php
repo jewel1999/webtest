@@ -80,6 +80,7 @@
                 <label for="rn_status" class="col-form-label">Status :</label>
                 <input type="text"  value="<?= $data['rn_status']?>" class="form-control" name="rn_status">
             </div>
+            
             <div class="mb-3">
                 <label for="rn_des" class="col-form-label">Description :</label>
                 <input type="text"  value="<?= $data['rn_des']?>" class="form-control" name="rn_des">

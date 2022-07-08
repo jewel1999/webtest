@@ -2,27 +2,7 @@
     session_start();
     require_once "../connect_db.php";
 
-    if(isset($_POST['com_insert'])){
-        $employee_id = $_POST['employee_id'];
-                        $fname_thai = $_POST['fname_thai'];
-                        $lname_thai = $_POST['lname_thai'];
-                        $fname_eng = $_POST['fname_eng'];
-                        $lname_eng = $_POST['lname_eng'];
-                        $nickname = $_POST['nickname'];
-                        $floor_  = $_POST['floor_'];
-                        $extn  = $_POST['extn'];
-                        $usermail  = $_POST['usermail'];
-                        $phone  = $_POST['phone'];
-                        $sex  = $_POST['sex'];
-                        $workgroup  = $_POST['workgroup'];
-                        $workline  = $_POST['workline'];
-                        $department  = $_POST['department'];
-                        $department_eng  = $_POST['department_eng'];
-                        $status_user = $_POST['status_user'];
-                        $station  = $_POST['station'];
-       
-        
-}
+
         
         /* ------end of update section ------- */
 
@@ -39,7 +19,7 @@
 
     <style>
         .container{
-            max-width:700px;
+            max-width:1000px;
         }
     </style>
 
@@ -50,7 +30,10 @@
                         $id = $_GET['id'];
                        
                         
-                        $stmt = $conn->query("SELECT * FROM employees WHERE id = $id");
+                        $stmt = $conn->query("SELECT staffinfo.*,department.*,workline.*,workgroup.* FROM staffinfo 
+                        LEFT JOIN department ON staffinfo.department_thai=department.id
+                        LEFT JOIN  workline ON staffinfo.workline_emp=workline.id
+                        LEFT JOIN  workgroup ON staffinfo.workgroup_emp=workgroup.id  WHERE staffinfo.st_id=$id");
                         $stmt->execute();
                         $data = $stmt->fetch();
                     }
@@ -58,60 +41,94 @@
   
             <!-- show modal-showmore started-->
            
-            <a href="admin_emp.php" class="btn btn-warning"> back </a>
+            <a href="admin_emp.php" class="mt-4 btn btn-warning position-absolute top-0 start-50 translate-middle "> ย้อนกลับ </a>
             <div class="container position-absolute top-50 start-50 ">
                 
-            <table class="table">
-        <thead>
-            <tr>
-            <th scope="col">#</th>
-            <th scope="col">employee #id</th>
-            <th scope="col">firstname</th>
-            <th scope="col">lastname</th>
-            <th scope="col">nickname</th>
-            <th scope="col">department</th>
-            <th scope="col">phone</th>
-            <th scope="col">extn</th>
+            <table class="table ">
+            <div class="container position-absolute top-50 start-50 ">
+                
+            <table class=" translate-middle">
+                        <tr>
+                            <th>#id</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['st_id']; ?></td>
+
+                        </tr>
+                        <tr>
+                            <th>รหัสพนักงาน</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['staff_id']; ?></td>
+
+                        </tr>
+                            <th>ชื่อจริง (ภาษาไทย)</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['fname_thai']; ?></td>
+
+                        <tr>
+                            <th>นามสกุล (ภาษาไทย)</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['lname_thai']; ?></td>
+                        </tr>
+
+                        <tr>
+                            <th>ชื่อจริง (ภาษาอังกฤษ)</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['fname_eng']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>นามสกุล (ภาษาอังกฤษ)</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['lname_eng']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>ชื่อเล่น</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['nickname']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>เพศ</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['sex']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>ชั้น</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['floor_']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>เบอร์ติดต่อภายใน</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['extn']; ?></td>
+                        </tr>
+
+                        <tr>
+                            <th>Usermail</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['usermail']; ?></td>
+                        </tr>
+
+                        <tr>
+                            <th>กลุ่มงาน (Workgroup)</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['workgroup_name']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>สายงาน (Workline)</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['workline_name']; ?></td>
+                        </tr>
+
+                        <tr>
+                            <th>แผนก</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['department_thai']; ?></td>
+                        </tr>
+                        
+                        <tr>
+                            <th>แผนก (ภาษาอังกฤษ)</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['department_eng']; ?></td>
+                        </tr>
+
+                        <tr>
+                            <th>Station</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['station']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>สถานะพนักงาน</th>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['status_staff']; ?></td>
+                        </tr>
+
+                    </table>
+                    </div>
           
 
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
-                $stmt =$conn->query("SELECT employees.*,department.*,workline.*,workgroup.* FROM employees 
-                LEFT JOIN department ON employees.department=department.id
-                LEFT JOIN  workline ON employees.workline=workline.id
-                LEFT JOIN  workgroup ON employees.workgroup=workgroup.id");
-                
-                $stmt->execute(); 
-              
-                $users_table = $stmt->fetchALL();
 
-                if(!$users_table){
-                    echo"<tr><td colpan='6' class='text-center'> No data found </td> </tr>";
-                }else{
-                    foreach  ($users_table as $users ) {   // foreach = loop data in table
-            ?>
-            <tr>
-                <th scope="row"><?php echo $users['id']; ?> </th>
-                <td><?php echo $users['employee_id']; ?>    </td>
-                
-                <td><a href="admin_show_emp.php"><?php echo $users['fname_thai'];?></a></td>
-                <td><?php echo $users['lname_thai'] ;  ?> </td>
-                <td><?php echo $users['nickname']; ?>  </td>
-                <td><?php echo $users['department_thai']; ?> </td>
-                <td><?php echo $users['phone']; ?>  </td>     
-                <td><?php echo $users['extn']; ?>  </td>          
-                <td> 
-                
-                   
-                </td>    
-            </tr>
-        <?php }} ?>   
-        </tbody>
-    </table>
-                    </div>
-    <!-- show modal started-->
 
 </body>
 

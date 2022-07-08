@@ -2,6 +2,18 @@
     session_start();
     require_once '../connect_db.php';
 
+    if(isset($_GET['delete'])){
+        $delete_id = $_GET['delete'];
+        $deletestmt = $conn->query("DELETE FROM staffinfo WHERE st_id = $delete_id");
+        $deletestmt->execute();
+
+        if($deletestmt){
+            echo"<script> alert('data hasbeen deleted successfully ');  </script>";
+            $_SESSION['success']="data has been deleted sccessfully";
+            header("refresh:1; url=admin_emp.php");
+        }
+    }
+
     
 ?>
 <!DOCTYPE html>
@@ -19,7 +31,7 @@
  
     <div class="container mt-3">
     <div class="md-12  d-flex ">
-                <a href="user_home.php" type="button" class="btn btn-dark" >back</a >
+                <a href="admin.php" type="button" class="btn btn-dark" >back</a >
             </div>
             <br>
             <div class="row">
@@ -33,7 +45,7 @@
             </div>
             
 
-                    <p class="text-secondary" >all user</p>
+                    <p class="text-secondary" >admin</p>
 
                   <br>
                     <form class="d-flex">
@@ -75,17 +87,17 @@
             ?>
             <tr>
                 <th scope="row"><?php echo $staff['st_id']; ?> </th>
-                <td><?php echo $staff['staff_id']; ?>  </td>
-                <td><?php echo $staff['fname_thai']; ?> &nbsp; <?php echo $staff['fname_thai']; ?>     </td>
+                <td><?php echo $staff['staff_id']; ?> </td>
+                <td><?php echo $staff['fname_thai']; ?> &nbsp; <?php echo $staff['lname_thai']; ?>     </td>
                 <td><?php echo $staff['extn']; ?>  </td>
                 <td><?php echo $staff['department_thai']; ?> </td>
                 <td><?php echo $staff['floor_']; ?> </td>
                 
                 <td> 
                     
-                    <button value="id=<?= $staff['st_id']; ?>" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#UserModalShowstaff">More</button>
-                    <a href="admin_edit_com.php?id=<?= $staff['st_id']; ?>"  class="btn btn-warning">Edit</a>
-                    <a href="?delete=<?= $staff['id']; ?>"  class="btn btn-danger" onclick="return confirm('are you sure to delete ?')" >Delete</a>
+                    <a href="admin_show_emp.php?id=<?= $staff['st_id']; ?>"  class="btn btn-dark">More</a>
+                    <a href="admin_edit_emp.php?id=<?= $staff['st_id']; ?>"  class="btn btn-warning">Edit</a>
+                    <a href="?delete=<?= $staff['st_id']; ?>"  class="btn btn-danger" onclick="return confirm('are you sure to delete ?')" >Delete</a>
                 </td>    
 
                 </tr>
@@ -98,131 +110,6 @@
             
             <!--+++++++++++++++++++++++++++ Modal staff info table  +++++++++++++++++++++++++++++-->
 
-
-            <div class="modal fade" id="UserModalShowstaff" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Staff information</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>    
-
-        <div class="modal-body"> 
-
-        <!-- start table -->
-
-        <?php 
-                    if(isset($_GET['id'])){
-                        $id = $_GET['id'];
-                        $stmt = $conn->query("SELECT * FROM staffinfo  WHERE st_id = $id");
-                        $stmt->execute();
-                        $data = $stmt->fetch();
-                    }
-                ?>
-       
-
-<?php 
-
-                $sttt =$conn->query("SELECT staffinfo.*,department.*,workline.*,workgroup.* FROM staffinfo 
-                LEFT JOIN department ON staffinfo.department_thai=department.id
-                LEFT JOIN  workline ON staffinfo.workline_emp=workline.id
-                LEFT JOIN  workgroup ON staffinfo.workgroup_emp=workgroup.id  WHERE staffinfo.st_id=$id "  );
-                $sttt->execute(); 
-                $stafftable = $sttt->fetchALL();
-                $sttt->execute(); 
-              
-                $users_table = $sttt->fetchALL();
-                    foreach  ($users_table as $users ) {   // foreach = loop data in table
-?>
-                    
-                    <div class="contianer">
-                        <table class="  border-primary ">
-                        <tr>
-                            <th>id</th>
-                            <td><?php echo $users['st_id']; ?></td>
-
-                        </tr>
-                        <tr>
-                            <th>staff id</th>
-                            <td><?php echo $users['staff_id']; ?></td>
-
-                        </tr>
-                            <th>ชื่อจริง (ภาษาไทย) </th>
-                            <td><?php echo $users['fname_thai']; ?></td>
-
-                        <tr>
-                            <th>นามสกุล (ภาษาไทย)</th>
-                            <td><?php echo $users['lname_thai']; ?></td>
-                        </tr>
-
-                        <tr>
-                            <th>ชื่อ (ภาษาอังกฤษ)</th>
-                            <td><?php echo $users['fname_eng']; ?></td>
-                        </tr>
-                        <tr>
-                            <th>นามสกุล (ภาษาอังกฤษ)</th>
-                            <td><?php echo $users['lname_eng']; ?></td>
-                        </tr>
-                        <tr>
-                            <th>ชื่อเล่น</th>
-                            <td><?php echo $users['nickname']; ?></td>
-                        </tr>
-                        <tr>
-                            <th>ชั้น</th>
-                            <td><?php echo $users['floor_']; ?></td>
-                        </tr>
-                        <tr>
-                            <th>เบอร์ติดต่อ</th>
-                            <td><?php echo $users['phonenumber']; ?></td>
-                        </tr>
-                        <tr>
-                            <th>เบอร์ติดต่อภายใน</th>
-                            <td><?php echo $users['extn']; ?></td>
-                        </tr>
-                        <tr>
-                            <th>อีเมลล์ผู้ใช้งาน</th>
-                            <td><?php echo $users['usermail']; ?></td>
-                        </tr>
-
-                        <tr>
-                            <th>ส่วนการทำงาน</th>
-                            <td><?php echo $users['workgroup_emp']; ?></td>
-                        </tr>
-                        
-                        <tr>
-                            <th>สายการทำงาน</th>
-                            <td><?php echo $users['workline_emp']; ?></td>
-                        </tr>
-                        <tr>
-                            <th>แผนก</th>
-                            <td><?php echo $users['department_thai']; ?></td>
-                        </tr>
-                        <tr>
-                            <th>แผนก (ภาษาอังกฤษ)</th>
-                            <td><?php echo $users['department_eng']; ?></td>
-                        </tr>
-                        <tr>
-                            <th>สถานะพนักงาน </th>
-                            <td><?php echo $users['status_staff']; ?></td>
-                        </tr>
-                        <tr>
-                            <th>station</th>
-                            <td><?php echo $users['station']; ?></td>
-                        </tr>
-
-                    </table>
-                    <?php } ?>   
-           
-        </div>
-        
-        </div>
-    </div>
-    </div>   
-    </div>   
-
-    
-
-
     <!-- insert staff info-->
        
 
@@ -230,7 +117,7 @@
         <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Update information</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Insert information</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>    
 
@@ -347,8 +234,8 @@
                     <label for="station" class="col-form-label">Station</label>
                     <select name="station" class="form-select" aria-label="Default select example">
                         <option selected> --- select ---</option>
-                        <option value="headstation">Head station</option>  
-                        <option value="branch">Branch</option>  
+                        <option value="Headstation">Head station</option>  
+                        <option value="Branch">Branch</option>  
                     </select>
                     </div>
                     <hr>

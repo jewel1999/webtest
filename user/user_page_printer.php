@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Printer edit : admin</title>
+    <title>ข้อมูลเครื่องพิมฑ์</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 
@@ -63,9 +63,9 @@
             <th scope="col">#</th>
             <th scope="col">printner serial-number</th>
             <th scope="col">printer name</th>
-            <th scope="col">owner</th>
+            <th scope="col">Department</th>
             <th scope="col">status</th>
-            <th scope="col">created time</th>
+            
             <th scope="col">more</th>
             </tr>
         </thead>
@@ -86,7 +86,7 @@
                 <td><?php echo $printer['printer_name']; ?>   </td>
                 <td><?php echo $printer['printer_owner']; ?>  </td>
                 <td><?php echo $printer['printer_status']; ?> </td>
-                <td><?php echo $printer['create_at']; ?>      </td>       
+                
                 <td>   
                      <a  type="button" class="btn btn-info " data-bs-toggle="modal"  data-bs-target="#ShowModal" >Show All</a>
                 </td>    

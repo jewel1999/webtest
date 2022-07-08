@@ -55,11 +55,11 @@
             ข้อมูลอุปกรณ์
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="user_fin_com.php">Computer</a></li>
-            <li><a class="dropdown-item" href="user_fin_printer.php">Printer</a></li>
-            <li><a class="dropdown-item" href="user_fin_other.php">Hardware</a></li>
+            <li><a class="dropdown-item" href="user_fin_com.php">คอมพิวเตอร์</a></li>
+            <li><a class="dropdown-item" href="user_fin_printer.php">เครื่องพิมพ์</a></li>
+            <li><a class="dropdown-item" href="user_fin_other.php">อุปกรณ์อื่นๆ</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="user_rin_rn.php">ใบแจ้งซ่อม</a></li>
+            <li><a class="dropdown-item" href="user_rin_rn.php">รายละเอียดใบแจ้งซ่อม</a></li>
             </ul>
         </li>
         

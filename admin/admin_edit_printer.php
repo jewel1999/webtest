@@ -56,7 +56,10 @@
                 <?php 
                     if(isset($_GET['id'])){
                         $id = $_GET['id'];
-                        $stmt = $conn->query("SELECT * FROM printers WHERE id = $id");
+                        $stmt = $conn->query("SELECT printers.*,department.*
+                        FROM printers
+                        LEFT JOIN department
+                        ON printers.printer_owner = department.id");
                         $stmt->execute();
                         $data = $stmt->fetch();
                     }
@@ -75,6 +78,7 @@
                 <label for="printer_name" class="col-form-label">Printer name :</label>
                 <input type="text" value="<?= $data['printer_name']?>" class="form-control" name="printer_name">
             </div>
+
             <div class="mb-3">
                 <label for="printer_owner" class="col-form-label">Printer owner :</label>
                 <input type="text" value="<?= $data['printer_owner']?>" class="form-control" name="printer_owner">
