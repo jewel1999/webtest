@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once '../connect_db.php';
+    require_once 'connect_db.php';
 
     if(isset($_GET['delete'])){
         $delete_id = $_GET['delete'];
@@ -53,17 +53,9 @@
                 <label for="rn_status" class="col-form-label">Status</label>  <!--[submit -> in process] = rn_status -->
                 <input type="text" class="form-control" name="rn_status">
             </div>
-<<<<<<< HEAD
-            
-
-            <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="rn_des" ></textarea>
-=======
             <div class="mb-3">
                 <label for="rn_des" class="col-form-label">Description</label> <!-- description -->
                 <input type="text" class="form-control" name="rn_des">
->>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
             </div>
 
             <div class="modal-footer">
@@ -83,16 +75,19 @@
     
     <div class="container mt-3">
     <div class="md-4  d-flex ">
-                <a href="admin.php" type="button" class="btn btn-dark" >back</a >
+                <a href="user.php" type="button" class="btn btn-dark" >back</a >
             </div>
             <br>
         <div class="row">
             <div class="col-md-6">
                     <h1> Repair Notices information </h1>
+                    <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" >
+                <button class="btn btn-outline-success" type="submit" name="search" >Search</button>
+                
+            </form> 
             </div>
-            <div class="col-md-6  d-flex justify-content-end">
-                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UserModal">Insert information</button>
-            </div>
+            
 
         </div>
         <hr>
@@ -147,9 +142,8 @@
                 <td><?php echo $rn['create_at']; ?>     </td>       
                 
                 <td>
-                     <a href="admin_show_rn.php?id=<?= $rn['id']; ?>"  class="btn btn-secondary">Show</a>
-                     <a href="admin_edit_rn.php?id=<?= $rn['id']; ?>"  class="btn btn-warning">Edit</a>
-                     <a href="?delete=<?= $rn['id']; ?>"  class="btn btn-danger" onclick="return confirm('are you sure to delete ?')" >Delete</a>
+                     <a href="user_edit_rn.php?id=<?= $rn['id']; ?>"  class="btn btn-secondary">More</a>
+                     
                 </td>    
             </tr>
         <?php }} ?>   

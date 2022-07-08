@@ -58,9 +58,23 @@
                 aria-label="Star themesberg/simple-bootstrap-5-dashboard on GitHub">Star</a>
         </div>-->
         
+<<<<<<< HEAD
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a type="button" class="btn btn-outline-danger" href="../logout.php" role="button" >Logout</a>
 </div>
+=======
+        <div class="dropdown px-3 mt-1">
+        <button class="btn btn-md btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" 
+        data-bs-toggle="dropdown" aria-expanded="false">Hello,admin :)</button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="admin_proflie.php">Proflie</a></li>
+            <li><a class="dropdown-item" href="#">notification</a></li>
+            <li><a class="dropdown-item" href="#">message</a></li>
+            <hr>
+            <li><a class="dropdown-item" href="../logout.php">logout</a></li>
+        </ul>
+        </div>
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
     </div>
     </nav> 
 
@@ -312,7 +326,11 @@
                 
                 </div>
                 <footer class="pt-5 d-flex justify-content-between"> 
+<<<<<<< HEAD
                     <span class="px-2 ">copyright &copy; 2022 <a href="https://themesberg.com" >jewel sp</a></span>
+=======
+                    <span class="px-2 ">copyright &copy; 2022 <a href="https://themesberg.com" > jewel sp :)</a></span>
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
                     <ul class="nav m-0">
                         <li class="nav-item"> 
                             <a href="#" class="nav-link text-secondary" aria-current="page">Privacy Policy </a>

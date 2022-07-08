@@ -70,12 +70,21 @@
                 <input type="text" value="<?= $data['department_name']?>" class="form-control" name="department_name">
             </div>
             <div class="mb-3">
+<<<<<<< HEAD
                 <label for="workgroup_name" class="col-form-label">workgroup</label>
                 <input type="text" value="<?= $data['workgroup_name']?>" class="form-control" name="workgroup_name">
             </div>
             <div class="mb-3">
                 <label for="workline_name" class="col-form-label">workline</label>
                 <input type="text" value="<?= $data['workline_name']?>" class="form-control" name="workline_name">
+=======
+                <label for="workgroup" class="col-form-label">workgroup</label>
+                <input type="text" value="<?= $data['workgroup']?>" class="form-control" name="workgroup">
+            </div>
+            <div class="mb-3">
+                <label for="workline" class="col-form-label">workline</label>
+                <input type="text" value="<?= $data['workline']?>" class="form-control" name="workline">
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
             </div>
            
             <div class="modal-footer">

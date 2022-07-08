@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    require_once "../connect_db.php";
+    require_once "connect_db.php";
     if(isset($_POST['printer_update'])){
         $id = $_POST['id'];
         $printer_sn = $_POST['printer_sn'];
@@ -20,17 +20,17 @@
                     $sql->execute();
 
                     $_SESSION['success'] = "Update sucessfully! " ;
-                    header("location:admin_printer.php");     
+                    header("location: user_printer.php");     
                 }else {
                     $_SESSION['error'] = "Update unsucessfully! " ;
-                    header("location:admin_printer.php");
+                    header("location: user_printer.php");
                 }
                  
         
         }
 
 ?>
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -52,18 +52,11 @@
 
         <!-- insert into data forms  -->   
         <div class="modal-body">  
-            <form action="admin_edit_printer.php" method="post" enctype="multiplepart/form-data">
+            <form action="user_edit_printer.php" method="post" enctype="multiplepart/form-data">
                 <?php 
                     if(isset($_GET['id'])){
                         $id = $_GET['id'];
-<<<<<<< HEAD
-                        $stmt = $conn->query("SELECT printers.*,department.*
-                        FROM printers
-                        LEFT JOIN department
-                        ON printers.printer_owner = department.id");
-=======
                         $stmt = $conn->query("SELECT * FROM printers WHERE id = $id");
->>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
                         $stmt->execute();
                         $data = $stmt->fetch();
                     }
@@ -82,31 +75,19 @@
                 <label for="printer_name" class="col-form-label">Printer name :</label>
                 <input type="text" value="<?= $data['printer_name']?>" class="form-control" name="printer_name">
             </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
             <div class="mb-3">
                 <label for="printer_owner" class="col-form-label">Printer owner :</label>
                 <input type="text" value="<?= $data['printer_owner']?>" class="form-control" name="printer_owner">
             </div>
-
-
-            <div class="form-group">
-                <label for="exampleFormControlSelect1"></label>
-                <select class="form-control" id="exampleFormControlSelect1" value="<?= $data['printer_status']?>" class="form-control" name="printer_status">
-                <option >Active</option>
-                <option>Empty</option>
-                </select>
+            <div class="mb-3">
+                <label for="printer_status" class="col-form-label">Status :</label>
+                <input type="text"  value="<?= $data['printer_status']?>" class="form-control" name="printer_status">
             </div>
 
-            
-
             <div class="modal-footer">
-            <a type="button" class="btn btn-secondary" href="admin_printer.php">Close</a>
-            <button type="submit" name="printer_update" class="btn btn-success"  >Update</button>
+            <a type="button" class="btn btn-secondary" href="user_printer.php">Close</a>
         </div>
             </form>
            
-        </div>
+        </div> 
       

@@ -2,12 +2,16 @@
     session_start();
     require_once "../connect_db.php";
     if(isset($_POST['com_update'])){
+<<<<<<< HEAD
         $id = $_POST['id'];
+=======
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
         $com_sn = $_POST['com_sn'];
         $com_name = $_POST['com_name'];
         $com_owner = $_POST['com_owner'];
         $com_status  = $_POST['com_status'];
         $cpu =$_POST['cpu'];
+<<<<<<< HEAD
         $ram =$_POST['ram'];
         $harddisk = $_POST['harddisk'];
         $modelcom =$_POST['modelcom'];
@@ -37,6 +41,31 @@
                     $sql->bindParam(":price",$price);
                     $sql->bindParam(":com_type",$com_type);
                     $sql->execute();
+=======
+        $ram =$_POST['harddisk'];
+        $brand =$_POST['brand'];
+        $modelcom =$_POST['modelcom'];
+        $price =$_POST['price'];
+        $license =$_POST['license'];
+        $com_type = $_POST['com_type'];
+    
+                if(!isset($_SESSION['error'])){
+                    $sql = $conn->prepare("UPDATE computers SET com_sn=:com_sn,com_name=:com_name,cpu=:cpu,
+                    harddisk=:harddisk,modelcom=:modelcom,brand=:brand,license=:license,com_type=:com_type,price=:price,
+                    com_owner=:com_owner,com_status=:com_status WHERE id=:id ");
+                   $sql->bindParam(":com_sn",$com_sn);
+                   $sql->bindParam(":com_name",$com_name);
+                   $sql->bindParam(":com_owner",$com_owner);
+                   $sql->bindParam(":com_status",$com_status);
+                   $sql->bindParam(":cpu",$cpu);
+                   $sql->bindParam(":harddisk",$harddisk);
+                   $sql->bindParam(":modelcom",$modelcom);
+                   $sql->bindParam(":brand",$brand);
+                   $sql->bindParam(":license",$license);
+                   $sql->bindParam(":price",$price);
+                   $sql->bindParam(":com_type",$com_type);
+                   $sql->execute();
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
                  
 
                     $_SESSION['success'] = "Update sucessfully! " ;
@@ -71,6 +100,7 @@
 </head>
 <body>
 
+<<<<<<< HEAD
             <div class="container mt-6"> 
                     <div class="modal-body"> 
                         <form action="admin_edit_com.php" method="post" enctype="multiplepart/form-data">
@@ -82,6 +112,19 @@
                                     $data = $stmt->fetch();
                                 }
                             ?>
+=======
+  <div class="container mt-6"> 
+        <div class="modal-body">  <-- insert into data forms  -->   
+            <form action="admin_edit_com.php" method="post" enctype="multiplepart/form-data">
+                <?php 
+                    if(isset($_GET['id'])){
+                        $id = $_GET['id'];
+                        $stmt = $conn->query("SELECT * FROM computers WHERE id = $id");
+                        $stmt->execute();
+                        $data = $stmt->fetch();
+                    }
+                ?>
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
 
             
             <div class="mb-3">
@@ -119,7 +162,11 @@
             </div>
 
             <div class="mb-3">
+<<<<<<< HEAD
                 <label for="modelcom" class="col-form-label">Model Name</label>
+=======
+                <label for="modelcom" class="col-form-label">Model</label>
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
                 <input type="text"  value="<?= $data['modelcom']?>" class="form-control" name="modelcom">
             </div>
 
@@ -136,10 +183,17 @@
                 <label for="com_type" class="col-form-label">Computer type</label>
                 <select class="form-select" id="inputGroupSelect01" name="com_type"  
                 value="<?= $data['com_type']?>" >
+<<<<<<< HEAD
                     <option selected>---select type---</option>
                     <option value="All-in-one">All-in-one</option>
                     <option value="Pc-laptop">Pc-laptop</option>
                     <option value="Notebook">Notebook</option>
+=======
+                    <option selected>select type</option>
+                    <option value="all-in-one">all-in-one</option>
+                    <option value="pc-laptop">pc-laptop</option>
+                    <option value="notebook">notebook</option>
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
                 </select>
                 
             </div>
@@ -147,8 +201,13 @@
                 <label for="com_status" class="col-form-label">Status :</label>
                 <select class="form-select" id="inputGroupSelect01" name="com_status">
                     <option selected><?= $data['com_status']?></option>
+<<<<<<< HEAD
                     <option value="Active">Active</option>
                     <option value="Empty">Empty</option>
+=======
+                    <option value="active">active</option>
+                    <option value="empty">empty</option>
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
                 </select>
             </div>
 

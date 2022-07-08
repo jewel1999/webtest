@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    require_once "../connect_db.php";
+    require_once "connect_db.php";
     if(isset($_POST['rn_update'])){
         $id = $_POST['id'];
         $rn_dn = $_POST['rn_dn'];
@@ -48,14 +48,9 @@
 </head>
 <body>
 
-<<<<<<< HEAD
-           
-=======
   <div class="container mt-6"> 
-        <div class="modal-body">  
-            <h4> Show Details </h4> 
+        <div class="modal-body">  <-- insert into data forms  -->   
             <form action="admin_edit_rn.php" method="post" enctype="multiplepart/form-data">
->>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
                 <?php 
                     if(isset($_GET['id'])){
                         $id = $_GET['id'];
@@ -65,53 +60,6 @@
                     }
                 ?>
 
-<<<<<<< HEAD
-            <a href="admin_rn.php" class="mt-4 btn btn-warning position-absolute top-0 start-50 translate-middle "> ย้อนกลับ </a>
-            <div class="container position-absolute top-50 start-50 ">
-                
-            <table class="table ">
-            <div class="container position-absolute top-50 start-50 ">
-                
-            <table class=" translate-middle">
-                        <tr>
-                            <th>#id</th>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['id'] ?></td>
-
-                        </tr>
-
-                        <tr>
-                            <th>Device name</th>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['rn_dn']; ?></td>
-
-                        </tr>
-
-                        <tr>
-                            <th>Service no</th>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['rn_no']; ?></td>
-
-                        </tr>
-
-                        <tr>
-                            <th>Service no</th>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['rn_no']; ?></td>
-                        </tr>
-
-                        <tr>
-                            <th>Start date </th>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['rn_date']; ?></td>
-                        </tr>
-
-                        <tr>
-                            <th>Status</th>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['rn_status']; ?></td>
-                        </tr>
-                        <tr>
-                            <th>Description</th>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $data['rn_des']; ?></td>
-                        </tr>
-
-                </div>
-=======
             <div class="mb-3">
                 <label  class="col-form-label">id :</label>
                 <input type="text" readonly value="<?= $data['id']?>" class="form-control" name="id">    
@@ -139,9 +87,8 @@
 
             <div class="modal-footer">
             <a type="button" class="btn btn-secondary" href="admin_rn.php">Close</a>
-            
+            <button type="submit" name="rn_update" class="btn btn-success" >Update</button>
         </div>
             </form>
->>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
            
         </div>

@@ -22,8 +22,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard : admin</title>
+<<<<<<< HEAD
     
     
+=======
+   
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
     <!-- icon sidebar cdn-->
     <script src="https://unpkg.com/feather-icons"></script> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -33,7 +37,11 @@
     <!-- Place this tag in your head or just before your close body tag. ["garph"] -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
+<<<<<<< HEAD
     <!-- <script type="text/javascript" src="script.js "></script> -->
+=======
+
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
 </head>
 
 <body>
@@ -247,6 +255,7 @@
                         </div>
                         </div>
         <!------------------- end of box section --------------------->
+<<<<<<< HEAD
                 <button type="button" class="btn btn-primary   " data-bs-toggle="modal" data-bs-target="#UserModal">Insert Department Group</button>
                 <hr>
                 <button type="button" class="btn btn-info  " data-bs-toggle="modal" data-bs-target="#UserModalworkgroup">Insert workgroup</button>
@@ -259,6 +268,11 @@
 
         
 <!--                     
+=======
+                <button type="button" class="btn btn-primary   " data-bs-toggle="modal" data-bs-target="#UserModal">Insert Workgroup </button>
+        <!------------------- insert modal type "working line" section  started --------------------->
+                    
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
         <div class="modal fade" id="UserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
@@ -293,6 +307,7 @@
         
         </div>
     </div>
+<<<<<<< HEAD
     </div> -->
 
 
@@ -415,11 +430,20 @@
         </div>
     </div>
     </div>
+=======
+    </div>
+
+
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
 
 
         <!------------------- started table section ------------------->
         
+<<<<<<< HEAD
        
+=======
+        
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
 
 <!-- footer started -->
 
@@ -443,6 +467,7 @@
                 </main>
     </div>
 
+<<<<<<< HEAD
     
 <!-- footer ended -->
 
@@ -495,14 +520,28 @@
         </div>
     </div>
     </div>
+=======
+    <script>  </script>
+
+
+
+
+<!-- footer ended -->
+
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
 
     <script src="https://cdn.jsdelivr.net/chartist.js/lastest/Chartlist.min.js"> </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>    
    
     <script> feather.replace()</script>
     
+<<<<<<< HEAD
   <?php include_once('script.php'); ?>
 </body>
 </html>
  
 
+=======
+</body>
+</html>
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a

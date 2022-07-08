@@ -1,6 +1,10 @@
 <?php
     session_start();
     require_once '../connect_db.php';
+<<<<<<< HEAD
+=======
+
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
     if(isset($_GET['delete'])){
         $delete_id = $_GET['delete'];
         $deletestmt = $conn->query("DELETE FROM printers WHERE id = $delete_id");
@@ -13,7 +17,10 @@
         }
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +28,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>printer information : admin</title>
+=======
+    <title>Computers information : admin</title>
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
@@ -44,6 +55,7 @@
                 <label for="printer_name" class="col-form-label">Printer name :</label>
                 <input type="text" class="form-control" name="printer_name">
             </div>
+<<<<<<< HEAD
 
             </div> 
             <div class="mb-3">
@@ -60,6 +72,12 @@
                         <?php } ?>
                         </select>
                         </div>
+=======
+            <div class="mb-3">
+                <label for="printer_owner" class="col-form-label">Printer owner :</label>
+                <input type="text" class="form-control" name="printer_owner">
+            </div>
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
             <div class="mb-3">
                 <label for="printer_status" class="col-form-label">Status </label>
                 <input type="text" class="form-control" name="printer_status">
@@ -127,6 +145,7 @@
             </tr>
         </thead>
         <tbody>
+<<<<<<< HEAD
         <?php 
                 
                 $stmt =$conn->query("SELECT printers.*,department.* FROM printers
@@ -139,12 +158,27 @@
                     echo"<tr> <td colpan='6' class='text-center'> No data found </td> </tr>";
                 }else{
                     foreach  ($stafftable as $printer) {   // foreach = loop data in table
+=======
+            <?php 
+                $stmt =$conn->query("SELECT * FROM printers");
+                $stmt->execute(); 
+                $printer_table = $stmt->fetchALL();
+
+                if(!$printer_table){
+                    echo"<tr> <td colpan='6' class='text-center'> No data found </td> </tr>";
+                }else{
+                    foreach  ($printer_table as $printer) {   // foreach = loop data in table
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
             ?>
             <tr>
                 <th scope="row"><?php echo $printer['id']; ?> </th>
                 <td><?php echo $printer['printer_sn']; ?>     </td>
                 <td><?php echo $printer['printer_name']; ?>   </td>
+<<<<<<< HEAD
                 <td><?php echo $printer['department_thai']; ?>  </td>
+=======
+                <td><?php echo $printer['printer_owner']; ?>  </td>
+>>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
                 <td><?php echo $printer['printer_status']; ?> </td>
                 <td><?php echo $printer['create_at']; ?>      </td>       
                 

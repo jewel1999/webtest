@@ -4,11 +4,7 @@
 
     if(isset($_GET['delete'])){
         $delete_id = $_GET['delete'];
-<<<<<<< HEAD
         $deletestmt = $conn->query("DELETE FROM computers WHERE id = $delete_id");
-=======
-        $deletestmt = $conn->query ("DELETE FROM computers WHERE id = $delete_id");
->>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
         $deletestmt->execute();
 
         if($deletestmt){
@@ -41,76 +37,21 @@
         <div class="modal-body"> 
             <form action="admin_insert_com.php" method="post" enctype="multiplepart/form-data">
             <div class="mb-3">
-                <label for="com_sn" class="col-form-label">Compuster serial-number</label>
+                <label for="com_sn" class="col-form-label">Compuster serial-number :</label>
                 <input type="text" class="form-control" name="com_sn">
             </div>
             <div class="mb-3">
-                <label for="com_name" class="col-form-label">Compuster name</label>
+                <label for="com_name" class="col-form-label">Compuster name :</label>
                 <input type="text" class="form-control" name="com_name">
             </div>
             <div class="mb-3">
-                <label for="com_owner" class="col-form-label">Compuster owner</label>
+                <label for="com_owner" class="col-form-label">Compuster owner :</label>
                 <input type="text" class="form-control" name="com_owner">
             </div>
-
-            <!-- computer type -->
-            <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01">Computer Type</label>
-                <select class="form-select" id="inputGroupSelect01" name="com_type">
-                    <option selected>select type</option>
-<<<<<<< HEAD
-                    <option value="All-in-one">All-in-one</option>
-                    <option value="Pc-laptop">Pc-laptop</option>
-                    <option value="Notebook">Notebook</option>
-=======
-                    <option value="all-in-one">all-in-one</option>
-                    <option value="pc-laptop">pc-laptop</option>
-                    <option value="notebook">notebook</option>
->>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
-                </select>
-            </div>
-            <!-- computer type ended -->
-
             <div class="mb-3">
-                <label for="cpu" class="col-form-label">CPU</label>
-                <input type="text" class="form-control" name="cpu">
+                <label for="com_status" class="col-form-label">Status :</label>
+                <input type="text" class="form-control" name="com_status">
             </div>
-            <div class="mb-3">
-                <label for="ram" class="col-form-label">RAM</label>
-                <input type="text" class="form-control" name="ram">
-            </div>
-            <div class="mb-3">
-                <label for="harddisk" class="col-form-label">Harddisk</label>
-                <input type="text" class="form-control" name="harddisk">
-            </div>
-            <div class="mb-3">
-                <label for="brand" class="col-form-label">Brand</label>
-                <input type="text" class="form-control" name="brand">
-            </div>
-            <div class="mb-3">
-                <label for="modelcom" class="col-form-label">Model</label>
-                <input type="text" class="form-control" name="modelcom">
-            </div>
-            <div class="mb-3">
-                <label for="license" class="col-form-label">License</label>
-                <input type="text" class="form-control" name="license">
-            </div>
-
-            <div class="mb-3">
-                <label for="price" class="col-form-label">Price</label>
-                <input type="text" class="form-control" name="price">
-            </div>
-
-            <!-- status -->
-            <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01">Status</label>
-                <select class="form-select" id="inputGroupSelect01" name="com_status">
-                    <option selected>status</option>
-                    <option value="active">active</option>
-                    <option value="empty">empty</option>
-                </select>
-            </div>
-                       
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" name="com_insert" class="btn btn-success">submit</button>
@@ -172,7 +113,8 @@
             <th scope="col">computer serial-number</th>
             <th scope="col">computer name</th>
             <th scope="col">owner</th>
-            <th scope="col">status</th>         
+            <th scope="col">status</th>
+            <th scope="col">created time</th>
             <th scope="col">action</th>
             </tr>
         </thead>
@@ -193,11 +135,11 @@
                 <td><?php echo $computers['com_name']; ?>   </td>
                 <td><?php echo $computers['com_owner']; ?>  </td>
                 <td><?php echo $computers['com_status']; ?> </td>
+                <td><?php echo $computers['create_at']; ?>  </td>       
                 <td> 
                     
-                    <a href="admin_show_com.php?id=<?= $computers['id']; ?>"  class="btn btn-secondary">ReadMore</a>
-                    <a href="admin_edit_com.php?id=<?= $computers['id']; ?>"  class="btn btn-warning">Edit</a>
-                    <a href="?delete=<?= $computers['id']; ?>"  class="btn btn-danger" onclick="return confirm('are you sure to delete ?')" >Delete</a>
+                     <a href="admin_edit_com.php?id=<?= $computers['id']; ?>"  class="btn btn-warning">Edit</a>
+                     <a href="?delete=<?= $computers['id']; ?>"  class="btn btn-danger" onclick="return confirm('are you sure to delete ?')" >Delete</a>
                 </td>    
             </tr>
         <?php }} ?>   

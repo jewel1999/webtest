@@ -53,17 +53,9 @@
                 <label for="rn_status" class="col-form-label">Status</label>  <!--[submit -> in process] = rn_status -->
                 <input type="text" class="form-control" name="rn_status">
             </div>
-<<<<<<< HEAD
-            
-
-            <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="rn_des" ></textarea>
-=======
             <div class="mb-3">
                 <label for="rn_des" class="col-form-label">Description</label> <!-- description -->
                 <input type="text" class="form-control" name="rn_des">
->>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
             </div>
 
             <div class="modal-footer">
@@ -83,7 +75,7 @@
     
     <div class="container mt-3">
     <div class="md-4  d-flex ">
-                <a href="admin.php" type="button" class="btn btn-dark" >back</a >
+                <a href="user_fin.php" type="button" class="btn btn-dark" >back</a >
             </div>
             <br>
         <div class="row">

@@ -21,11 +21,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <title>อุปกรณ์อื่น ๆ :admin</title>
-=======
     <title>Other [Hardware] : admin</title>
->>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
@@ -75,7 +71,7 @@
     
     <div class="container mt-3">
     <div class="md-4  d-flex ">
-                <a href="admin.php" type="button" class="btn btn-dark" >back</a >
+                <a href="user_fin.php" type="button" class="btn btn-dark" >back</a >
             </div>
             <br>
         <div class="row">

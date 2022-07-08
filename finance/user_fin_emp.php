@@ -10,7 +10,7 @@
         if($deletestmt){
             echo"<script> alert('data hasbeen deleted successfully ');  </script>";
             $_SESSION['success']="data has been deleted sccessfully";
-            header("refresh:1; url=admin_rn.php");
+            header("refresh:1; url=user_fin_emp.php");
         }
     }
 
@@ -36,7 +36,7 @@
         </div>    
 
         <div class="modal-body">        
-            <form action="admin_insert_rn.php" method="post" enctype="multiplepart/form-data">
+            <form action="fin_insert_rn.php" method="post" enctype="multiplepart/form-data">
             <div class="mb-3">
                 <label for="rn_dn" class="col-form-label">Device Name</label>
                 <input type="text" class="form-control" name="rn_dn">
@@ -53,17 +53,9 @@
                 <label for="rn_status" class="col-form-label">Status</label>  <!--[submit -> in process] = rn_status -->
                 <input type="text" class="form-control" name="rn_status">
             </div>
-<<<<<<< HEAD
-            
-
-            <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="rn_des" ></textarea>
-=======
             <div class="mb-3">
                 <label for="rn_des" class="col-form-label">Description</label> <!-- description -->
                 <input type="text" class="form-control" name="rn_des">
->>>>>>> e316fe89715b1e02e60792212f45ff29a4b0de6a
             </div>
 
             <div class="modal-footer">
@@ -83,16 +75,19 @@
     
     <div class="container mt-3">
     <div class="md-4  d-flex ">
-                <a href="admin.php" type="button" class="btn btn-dark" >back</a >
+                <a href="user_fin.php" type="button" class="btn btn-dark" >back</a >
             </div>
             <br>
         <div class="row">
             <div class="col-md-6">
                     <h1> Repair Notices information </h1>
+                    <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" >
+                <button class="btn btn-outline-success" type="submit" name="search" >Search</button>
+                
+            </form> 
             </div>
-            <div class="col-md-6  d-flex justify-content-end">
-                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UserModal">Insert information</button>
-            </div>
+            
 
         </div>
         <hr>
@@ -120,6 +115,7 @@
             <tr>
             <th scope="col">#</th>
             <th scope="col">Device Name</th>
+            <th scope="col"></th>
             <th scope="col">Service No.</th>
             <th scope="col">Start Date</th>
             <th scope="col">Status</th>
@@ -140,16 +136,16 @@
             ?>
             <tr>
                 <th scope="row"><?php echo $rn['id']; ?> </th>
-                <td><?php echo $rn['rn_dn']; ?>         </td>
-                <td><?php echo $rn['rn_no']; ?>         </td>
-                <td><?php echo $rn['rn_date']; ?>       </td>
-                <td><?php echo $rn['rn_status']; ?>     </td>
-                <td><?php echo $rn['create_at']; ?>     </td>       
+                <td><?php echo $rn['rn_dn']; ?> </td>
+                <td><?php echo $rn['rn_dn']; ?> </td>
+                <td><?php echo $rn['rn_no']; ?> </td>
+                <td><?php echo $rn['rn_date']; ?></td>
+                <td><?php echo $rn['rn_status']; ?> </td>
+                <td><?php echo $rn['create_at']; ?> </td>       
                 
                 <td>
-                     <a href="admin_show_rn.php?id=<?= $rn['id']; ?>"  class="btn btn-secondary">Show</a>
-                     <a href="admin_edit_rn.php?id=<?= $rn['id']; ?>"  class="btn btn-warning">Edit</a>
-                     <a href="?delete=<?= $rn['id']; ?>"  class="btn btn-danger" onclick="return confirm('are you sure to delete ?')" >Delete</a>
+                     <a href="user_edit_rn.php?id=<?= $rn['id']; ?>"  class="btn btn-secondary">More</a>
+                     
                 </td>    
             </tr>
         <?php }} ?>   
